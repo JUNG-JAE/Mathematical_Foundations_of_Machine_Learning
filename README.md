@@ -34,15 +34,18 @@ $$
 - $\eta$: learning rate, step size
 - $\nabla f(x_k)$: gradient of the objective function $f$ at $x_k$
 
-GD is an optimization algorithm that minimizes a given objective function $f: \mathbb{R}^n \to \mathbb{R}$ by iteratively updating the variable in the direction that decreases the function value, guided by the gradient. The gradient $\nabla f(x_k)$ represents the direction of steepest ascent. Therefore, to find a minimum, we proceed in the opposite direction. <span style="color:red">An important point about GD is that updates are not computed directly from the value of</span> $\textcolor{red}{f(x)}$<span style="color:red">, but rather from the direction determined by the gradient</span> $\textcolor{red}{\nabla f(x_k)}$ <span style="color:red">and the step size</span> $\textcolor{red}{\eta}$<span style="color:red">, which specifies how far to move.</span>
+GD is an optimization algorithm that minimizes a given objective function $f: \mathbb{R}^n \to \mathbb{R}$ by iteratively updating the variable in the direction that decreases the function value, guided by the gradient. The gradient $\nabla f(x_k)$ represents the direction of steepest ascent. Therefore, to find a minimum, we proceed in the opposite direction. <font color="red">An important point about GD is that updates are not computed directly from the value of</font> $\textcolor{red}{f(x)}$<font color="red">, but rather from the direction determined by the gradient</font> $\textcolor{red}{\nabla f(x_k)}$ <font color="red">and the step size</font> $\textcolor{red}{\eta}$<font color="red">, which specifies how far to move.</font>
 
 ### 1.2.2. Example of GD
 Consider the objective function  $f(x) = x^2,$ whose derivative (gradient in 1D) is $\nabla f(x) = f'(x) = 2x$. In this example, we assume that the closed form of $x^2$ is not available. We apply Gradient Descent with learning rate $\eta = 0.1$, using the update rule:
+
 $$ 
 x_{k+1} = x_k - \eta \nabla f(x_k)= x_k - 0.1 \cdot (2x_k)= 0.8 x_k.
 $$
+
 Let the initial point be $x_0 = 2$.  
 The following table shows the first 5 iterations of gradient descent.
+
 $$
 \begin{array}{c|c|c|c|c}
 \hline
@@ -95,26 +98,29 @@ $$
 where $H_k$ is the Hessian matrix of $f$ at $x_k$.
 
 For small updates $\Delta$, the first-order term dominates, so
+
 $$  
 f(x_k + \Delta) - f(x_k)  
 \approx \Delta f  
 = \nabla f(x_k)^\top \Delta.  
 $$
+
 To decrease $f$, we need $\Delta f < 0$, which means we must choose $\Delta$ such that  
 $\nabla f(x_k)^\top \Delta$ is negative.  Therefore, $\Delta$ must point in the opposite direction of the gradient:
+
 $$  
 \Delta \propto -\nabla f(x_k).  
 $$
-Introducing a learning rate $\eta > 0$, we set
-$$  
-\Delta = -\eta \nabla f(x_k),  
-$$
-and the Gradient Descent update becomes
+
+Introducing a learning rate $\eta > 0$, we set $\Delta = -\eta \nabla f(x_k),$ and the Gradient Descent update becomes:
+
 $$  
 x_{k+1} = x_k + \Delta  
 = x_k - \eta \nabla f(x_k).  
 $$
+
 Based on the first-order approximation, the decrease in the function value is
+
 $$  
 \Delta f  
 \approx \nabla f(x_k)^\top (-\eta \nabla f(x_k))  
