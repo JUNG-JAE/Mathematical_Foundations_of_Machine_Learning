@@ -218,7 +218,7 @@ $$
 
 **Proof**
 
-[Dimensional Analysis] | first, we analyze the dimensions of the term $y^\top X \theta$: 
+[Dimensional Analysis] first, we analyze the dimensions of the term $y^\top X \theta$: 
 
 $$
 \underbrace{y^\top}_{(1 \times n)} \times \underbrace{X}_{(n \times p)} \times \underbrace{\theta}_{(p \times 1)} \rightarrow (1 \times p) \times (p \times 1) \rightarrow (1 \times 1)
@@ -226,19 +226,19 @@ $$
 
 Since the result is a $1 \times 1$ matrix, let $s = y^\top X \theta$, where $s$ is a scalar. 
 
-_Property of Scalars_ | For any scalar $s \in \mathbb{R}$, the transpose of the scalar is equal to itself: 
+[Property of Scalars] For any scalar $s \in \mathbb{R}$, the transpose of the scalar is equal to itself: 
 
 $$
 s^\top = s
 $$
 
-_Application of Transpose Properties_ | By applying the transpose operation to $s$ (using the property $(ABC)^\top = C^\top B^\top A^\top$), we get:
+[Application of Transpose Properties] By applying the transpose operation to $s$ (using the property $(ABC)^\top = C^\top B^\top A^\top$), we get:
 
 $$
 \begin{aligned} s^\top &= (y^\top X \theta)^\top \\ &= \theta^\top X^\top (y^\top)^\top \\ &= \theta^\top X^\top y \end{aligned}
 $$
 
-_Conclusion_ | Since $s = s^\top$, it follows that: 
+[Conclusion] Since $s = s^\top$, it follows that: 
 
 $$
 y^\top X \theta = \theta^\top X^\top y
@@ -265,37 +265,37 @@ $$
 
 **Proof**
 
-_Perturbation_ | Consider a small change $d\theta$ in $\theta$. We evaluate the function at $\theta + d\theta$:
+[Perturbation] Consider a small change $d\theta$ in $\theta$. We evaluate the function at $\theta + d\theta$:
 
 $$
 f(\theta + d\theta) = (\theta + d\theta)^\top A (\theta + d\theta)
 $$
 
-_Expansion_ | Distribute the terms:
+[Expansion] Distribute the terms:
 
 $$
 \begin{aligned} f(\theta + d\theta) &= (\theta^\top + d\theta^\top) A (\theta + d\theta) \\ &= \underbrace{\theta^\top A \theta}_{\text{original } f(\theta)} + (d\theta)^\top A \theta + \theta^\top A d\theta + \underbrace{(d\theta)^\top A d\theta}_{\text{higher-order term}} \end{aligned}
 $$
 
-_Total Differential_ | The total differential $df$ consists of the linear terms in $d\theta$. The term $(d\theta)^\top A d\theta$ is second-order (quadratic in $d\theta$), so it approaches 0 faster than $d\theta$. Thus, we ignore it for the first derivative:
+[Total Differential] The total differential $df$ consists of the linear terms in $d\theta$. The term $(d\theta)^\top A d\theta$ is second-order (quadratic in $d\theta$), so it approaches 0 faster than $d\theta$. Thus, we ignore it for the first derivative:
 
 $$
 df \approx (d\theta)^\top A \theta + \theta^\top A d\theta
 $$
 
-_Scalar Transpose Property_ | Note that $(d\theta)^\top A \theta$ results in a scalar. A scalar is equal to its transpose ($s = s^\top$). Thus:
+[Scalar Transpose Property] Note that $(d\theta)^\top A \theta$ results in a scalar. A scalar is equal to its transpose ($s = s^\top$). Thus:
 
 $$
 (d\theta)^\top A \theta = \left( (d\theta)^\top A \theta \right)^\top = \theta^\top A^\top d\theta
 $$
 
-_Substitution and Factoring_ | Substitute this back into the expression for $df$:
+[Substitution and Factoring] Substitute this back into the expression for $df$:
 
 $$
 \begin{aligned} df &= \theta^\top A^\top d\theta + \theta^\top A d\theta \\ &= \theta^\top (A^\top + A) d\theta \end{aligned}
 $$
 
-_Identification of Gradient_ | By the definition of the gradient, the differential is given by $df = (\nabla_\theta f)^\top d\theta$. Comparing this with our result:
+[Identification of Gradient] By the definition of the gradient, the differential is given by $df = (\nabla_\theta f)^\top d\theta$. Comparing this with our result:
 
 $$
 (\nabla_\theta f)^\top = \theta^\top (A^\top + A)
