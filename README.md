@@ -665,7 +665,10 @@ $$
 and the log-likelihood is as follows:
 
 $$
-\begin{align} L(\theta \mid x) &= \sum_{i=1}^{n} \log \left( \frac{1}{\sigma \sqrt{2\pi}} \exp\left(-\frac{(x_i - \mu)^2}{2\sigma^2} \right) \right) \\[6pt] &= \sum_{i=1}^{n} \left\{ \log\left( \exp\left( -\frac{(x_i - \mu)^2}{2\sigma^2} \right) \right) - \log(\sigma \sqrt{2\pi}) \right\} \\[6pt] &= \sum_{i=1}^{n} \left\{ -\frac{(x_i - \mu)^2}{2\sigma^2} - \log(\sigma) - \log(\sqrt{2\pi}) \right\} \end{align}
+\begin{align}
+L(\theta \mid x) &= \sum_{i=1}^{n} \log \left( \frac{1}{\sigma \sqrt{2\pi}} \exp\left(-\frac{(x_i - \mu)^2}{2\sigma^2} \right) \right) \\
+[6pt] &= \sum_{i=1}^{n} \left\{ \log\left( \exp\left( -\frac{(x_i - \mu)^2}{2\sigma^2} \right) \right) - \log(\sigma \sqrt{2\pi}) \right\} \\[6pt] 
+&= \sum_{i=1}^{n} \left\{ -\frac{(x_i - \mu)^2}{2\sigma^2} - \log(\sigma) - \log(\sqrt{2\pi}) \right\} \end{align}
 $$
 
 Therefore, if we partially differentiate $L(\theta|x)$ with respect to $\mu$,
