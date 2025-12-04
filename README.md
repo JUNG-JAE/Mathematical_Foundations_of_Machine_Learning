@@ -46,15 +46,14 @@ $$
 Let the initial point be $x_0 = 2$.  
 The following table shows the first 5 iterations of gradient descent.
 
-| k | x_k     | Gradient \(2x_k\) | Update \(x_{k+1} = x_k - 0.1(2x_k)\)   | \(f(x_k) = x_k^2\) |
-|---|---------|-------------------|-----------------------------------------|---------------------|
-| 0 | 2.0     | 4.0               | 2.0 − 0.4 = 1.6                         | 4.0                 |
-| 1 | 1.6     | 3.2               | 1.6 − 0.32 = 1.28                       | 2.56                |
-| 2 | 1.28    | 2.56              | 1.28 − 0.256 = 1.024                    | 1.6384              |
-| 3 | 1.024   | 2.048             | 1.024 − 0.2048 = 0.8192                 | 1.048576            |
-| 4 | 0.8192  | 1.6384            | 0.8192 − 0.16384 = 0.65536              | 0.67108864          |
-| 5 | 0.65536 | 1.31072           | 0.65536 − 0.131072 = 0.524288           | 0.4294967296        |
-
+| k | \(x_k\) | Gradient \(2x_k\) | Update \(x_{k+1} = x_k - 0.1(2x_k)\) | \(f(x_k) = x_k^2\) |
+|---|--------|-------------------|---------------------------------------|---------------------|
+| 0 | $2.0$     | $4.0$             | $2.0 - 0.4 = 1.6$                     | $4.0$               |
+| 1 | $1.6$     | $3.2$             | $1.6 - 0.32 = 1.28$                   | $2.56$              |
+| 2 | $1.28$    | $2.56$            | $1.28 - 0.256 = 1.024$                | $1.6384$            |
+| 3 | $1.024$   | $2.048$           | $1.024 - 0.2048 = 0.8192$             | $1.048576$          |
+| 4 | $0.8192$  | $1.6384$          | $0.8192 - 0.16384 = 0.65536$          | $0.67108864$        |
+| 5 | $0.65536$ | $1.31072$         | $0.65536 - 0.131072 = 0.524288$       | $0.4294967296$      |
 
 <details>
 <summary><b>Additional remarks on GD</b></summary>
@@ -68,7 +67,7 @@ GD is an algorithm that minimizes a scalar objective function $f: \mathbb{R}^n \
 
 Gradient Descent is derived from the first-order Taylor approximation, where $-\nabla f$ represents the direction of maximum decrease. To understand this, we revisit the Taylor expansion.
 
-> **Definition of Taylor expansion**: The Taylor series or Taylor expansion of a function is an infinite sum of terms expressed in terms of the function’s derivatives at a single point [2]. In other words, it provides a polynomial approximation of the function near that point.
+**Definition of Taylor expansion**: The Taylor series or Taylor expansion of a function is an infinite sum of terms expressed in terms of the function’s derivatives at a single point [2]. In other words, it provides a polynomial approximation of the function near that point.
 
 $$  
 \begin{align}  
