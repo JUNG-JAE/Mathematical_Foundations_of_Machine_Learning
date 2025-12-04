@@ -13,13 +13,17 @@ Optimization problems are generally divided into convex and non-convex optimizat
 ## 1.1. Basic definiction of optimization problems
 In typical optimization theory, a specific problem is expressed as an objective function  $f(x)$, and the goal is to find the maximum or minimum value of this objective function. When there are no constraints, the optimization problem can be defined as follows:
 
-$$\min_{x \in \mathbb{R}^n} f(x)$$
+$$
+\min_{x \in \mathbb{R}^n} f(x)
+$$
+
 If we let $f(x) = x^2$, our goal is to find the point where $x^2$ attains its minimum value. Here, $x$ is called the decision variable. When the objective function is simple, as in this example, we can derive a closed-form. Specifically, since the derivative is $2x$, the function reaches its minimum when $x = 0$. (We take the derivative because, for smooth functions, the gradient is zero at a minimum or maximum point. Of course, closed-form solutions can also be obtained by other methods—such as algebraic manipulation, geometric reasoning, or using subgradients.)
 
 ## 1.2. Gradient Descent
 However, let us assume that the objective function in the example does not have a closed form. When solving an unconstrained optimization problem without a closed-form solution, we typically use gradient descent (GD). GD is useful because it does not require knowledge of the entire shape of the function. It only requires that we can compute the gradient at the current point.
 
 ### 1.2.1. Definition of gradient descent
+
 $$  
 \text{Given } f: \mathbb{R}^n \to \mathbb{R},  
 \quad x_{k+1} = x_k - \eta \nabla f(x_k),  
@@ -34,7 +38,9 @@ GD is an optimization algorithm that minimizes a given objective function $f: \m
 
 ### 1.2.2. Example of GD
 Consider the objective function  $f(x) = x^2,$ whose derivative (gradient in 1D) is $\nabla f(x) = f'(x) = 2x$. In this example, we assume that the closed form of $x^2$ is not available. We apply Gradient Descent with learning rate $\eta = 0.1$, using the update rule:
-$$ x_{k+1} = x_k - \eta \nabla f(x_k)= x_k - 0.1 \cdot (2x_k)= 0.8 x_k.$$
+$$ 
+x_{k+1} = x_k - \eta \nabla f(x_k)= x_k - 0.1 \cdot (2x_k)= 0.8 x_k.
+$$
 Let the initial point be $x_0 = 2$.  
 The following table shows the first 5 iterations of gradient descent.
 $$
