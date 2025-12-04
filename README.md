@@ -124,7 +124,7 @@ Thus, Gradient Descent always updates the parameters in a direction that decreas
 <br>
 
 # 2. Machine Learning from optimization persepctive
-Let us redefine model training in ML from the viewpoint of optimization. The goal of machine learning is to make the model represent the underlying data distribution well. Therefore, the objective is to reduce the loss between the real data and the model’s output. Consider a dataset $D={(x_i, y_i)}^{n}_{i=1}$ and a model $f_{\theta}(x):\theta_1 x^2+\theta_2 x + \theta_3$. Using the Mean Squared Error (MSE) loss $L(\theta)=\frac{1}{n}\sum^{n}_{i=1}(\hat{y}_i-y_i)^2$, the optimization problem is defined as follows:
+Let us redefine model training in ML from the viewpoint of optimization. The goal of machine learning is to make the model represent the underlying data distribution well. Therefore, the objective is to reduce the loss between the real data and the model’s output. Consider a dataset $D={(x_i, y_i)}^{n}_{i=1}$ and a model $f_{\theta}(x):\theta_1 x^2+\theta_2 x + \theta_3$ . Using the Mean Squared Error (MSE) loss $L(\theta)=\frac{1}{n}\sum^{n}_{i=1}(\hat{y}_i-y_i)^2$, the optimization problem is defined as follows:
 
 $$
 \min_{\theta_1,\theta_2,\theta_3\in\mathbb{R}} \frac{1}{n}\sum^{n}_{i=1}(\theta_1 x^2 + \theta_2 x + \theta_3-y_i)^2
@@ -357,7 +357,14 @@ and the corresponding design matrix is
 
 $$  
 X =
-\begin{bmatrix} 0^2 & 0 & 1 \\ 1^2 & 1 & 1 \\ 2^2 & 2 & 1 \\ 3^2 & 3 & 1 \end{bmatrix} = \begin{bmatrix} 0 & 0 & 1 \\ 1 & 1 & 1 \\ 4 & 2 & 1 \\ 9 & 3 & 1 \end{bmatrix}, \qquad
+\begin{bmatrix}
+0^2 & 0 & 1 \\ 
+1^2 & 1 & 1 \\ 
+2^2 & 2 & 1 \\ 
+3^2 & 3 & 1 
+\end{bmatrix} 
+= \begin{bmatrix}
+0 & 0 & 1 \\ 1 & 1 & 1 \\ 4 & 2 & 1 \\ 9 & 3 & 1 \end{bmatrix}, \qquad
 y= \begin{bmatrix} 1\\2\\5\\10 \end{bmatrix}. 
 $$
 
