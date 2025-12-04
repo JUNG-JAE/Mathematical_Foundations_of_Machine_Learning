@@ -1,8 +1,6 @@
 # Mathematical Foundations of Machine Learning
 The goal of this post is to interpret the theoretical foundations of ML from the perspectives of optimization and probability models.
 
-<br>
-
 # 1. Background of Optimization
 Training a model in ML can be viewed as a special form of an optimization problem. Thus, we first provide a brief explanation of the basic concepts in optimization theory.
 
@@ -78,13 +76,13 @@ Gradient Descent is derived by noting that the first-order Taylor approximation 
 Near the current point $x_k$, the first- and second-order Taylor approximations of $f$ are:
 
 $$
-\begin{aligned}  
-f(x_k + \Delta)  
-&\approx f(x_k) + \nabla f(x_k)^\top \Delta, \  
-f(x_k + \Delta)  
-&\approx f(x_k) + \nabla f(x_k)^\top \Delta  
-+ \frac{1}{2}\Delta^\top H_k \Delta,  
-\end{aligned}  
+\begin{aligned}
+f(x_k + \Delta)
+&\approx f(x_k) + \nabla f(x_k)^\top \Delta, \\
+f(x_k + \Delta)
+&\approx f(x_k) + \nabla f(x_k)^\top \Delta
+    + \frac{1}{2}\Delta^\top H_k \Delta,
+\end{aligned}
 $$
 
 where $H_k$ is the Hessian matrix of $f$ at $x_k$.
