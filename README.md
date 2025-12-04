@@ -173,11 +173,11 @@ Thus, the objective function (loss function) is defined as:
 
 $$
 \begin{align}
-L(\theta) &= \frac{1}{n}\sum^{n}_{i=1}(\hat{y}_i-y_i)^2=\frac{1}{n}\|X\theta-y\|^2_2 \tag{1}\\
-&= \frac{1}{n}(X\theta-y)^\top(X\theta-y) \tag{2}\\
-&= \frac{1}{n}(X\theta)^\top(X\theta)-(X\theta)^\top y-y^\top(X\theta)+y^\top y \tag{3}\\
-&= \frac{1}{n}\theta^\top X^\top X\theta-\theta^\top X^\top y-y^\top X\theta+y^\top y \tag{4}\\
-&= \frac{1}{n}\theta^\top X^\top X\theta-2y^\top X\theta+y^\top y \tag{5}
+L(\theta) &= \frac{1}{n}\sum^{n}_{i=1}(\hat{y}_i-y_i)^2=\frac{1}{n}\|X\theta-y\|^2_2\\
+&= \frac{1}{n}(X\theta-y)^\top(X\theta-y)\\
+&= \frac{1}{n}(X\theta)^\top(X\theta)-(X\theta)^\top y-y^\top(X\theta)+y^\top y \\
+&= \frac{1}{n}\theta^\top X^\top X\theta-\theta^\top X^\top y-y^\top X\theta+y^\top y\\
+&= \frac{1}{n}\theta^\top X^\top X\theta-2y^\top X\theta+y^\top y
 \end{align}
 $$
 
