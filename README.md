@@ -667,7 +667,7 @@ and the log-likelihood is as follows:
 $$
 \begin{align}
 L(\theta \mid x) &= \sum_{i=1}^{n} \log \left( \frac{1}{\sigma \sqrt{2\pi}} \exp \left(-\frac{(x_i - \mu)^2}{2\sigma^2} \right) \right) \\
-[6pt] &= \sum_{i=1}^{n} \left\{ \log \left( \exp \left( -\frac{(x_i - \mu)^2}{2\sigma^2} \right) \right) - \log(\sigma \sqrt{2\pi}) \right\} \\[6pt] 
+[6pt] &= \sum_{i=1}^{n} \left\{ \log \left( \exp \left( -\frac{(x_i - \mu)^2}{2\sigma^2} \right) \right) - \log(\sigma \sqrt{2\pi}) \right\} \\
 &= \sum_{i=1}^{n} \left\{ -\frac{(x_i - \mu)^2}{2\sigma^2} - \log(\sigma) - \log(\sqrt{2\pi}) \right\} \end{align}
 $$
 
@@ -675,8 +675,8 @@ Therefore, if we partially differentiate $L(\theta|x)$ with respect to $\mu$,
 
 $$
 \begin{align}
-\frac{\partial L(\theta \mid x)}{\partial \mu} &= -\frac{1}{2\sigma^{2}} \sum_{i=1}^{n} \frac{\partial}{\partial \mu} \left( x_i^{\,2} - 2x_i \mu + \mu^{2} \right) \\[6pt]
-&= -\frac{1}{2\sigma^{2}} \sum_{i=1}^{n} \left( -2x_i + 2\mu \right) \\[6pt] &= \frac{1}{\sigma^{2}} \sum_{i=1}^{n} (x_i - \mu) \\[6pt]
+\frac{\partial L(\theta \mid x)}{\partial \mu} &= -\frac{1}{2\sigma^{2}} \sum_{i=1}^{n} \frac{\partial}{\partial \mu} \left( x_i^{\,2} - 2x_i \mu + \mu^{2} \right) \\
+&= -\frac{1}{2\sigma^{2}} \sum_{i=1}^{n} \left( -2x_i + 2\mu \right) \\[6pt] &= \frac{1}{\sigma^{2}} \sum_{i=1}^{n} (x_i - \mu) \\
 &= \frac{1}{\sigma^{2}} \left( \sum_{i=1}^{n} x_i - n\mu \right) = 0 
 \end{align}
 $$
