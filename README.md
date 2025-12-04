@@ -53,9 +53,9 @@ The following table shows the first 5 iterations of gradient descent.
 | 4 | 0.8192  | 1.6384            | 0.8192 − 0.16384 = 0.65536              | 0.67108864          |
 | 5 | 0.65536 | 1.31072           | 0.65536 − 0.131072 = 0.524288           | 0.4294967296        |
 
+<br>
 
 **Additional remarks on GD**
-
 GD is an algorithm that minimizes a scalar objective function $f: \mathbb{R}^n \to \mathbb{R}$. A single notion of “smaller” is defined only when the output is a scalar, and the descent direction of the gradient is also meaningful in that case. In contrast, if the function outputs a vector, such as $f: \mathbb{R}^n \to \mathbb{R}^m$, each component represents a different objective, resulting in a multi-objective optimization problem.
 
 ## 1.3. Gradient Descent from Taylor Expansion (optional)
@@ -198,49 +198,49 @@ $$
 $$
 
 
-<details>
-<summary><b>Additional remarks on GD</b></summary>
+## 2.2. Proof of Differentiation rules (optional)
 
-GD minimizes a scalar objective function \( f: \mathbb{R}^n \to \mathbb{R} \).  
-In contrast, for a vector-valued function \( \begin{aligned} s^\top &= (y^\top X \theta)^\top \\ &= \theta^\top X^\top (y^\top)^\top \\ &= \theta^\top X^\top y \end{aligned} \),  
-each component represents a different objective.
-
-</details>
-
----
-**Differentiation rules**
-
-### Scalar Transpose
+### 2.2.1. Scalar Transpose
 
 **Assumption**
-> Let the dimensions of the matrix and vectors be defined as follows:
-> - $X \in \mathbb{R}^{n \times p}$
-> - $\theta \in \mathbb{R}^{p \times 1}$ (or simply $\mathbb{R}^p$)
-> - $y \in \mathbb{R}^{n \times 1}$ (or simply $\mathbb{R}^n$)   
+Let the dimensions of the matrix and vectors be defined as follows:
+ - $X \in \mathbb{R}^{n \times p}$
+ - $\theta \in \mathbb{R}^{p \times 1}$ (or simply $\mathbb{R}^p$)
+ - $y \in \mathbb{R}^{n \times 1}$ (or simply $\mathbb{R}^n$)   
 
 **Claim**   
-
-> $$
-> \theta^\top X^\top y = y^\top X \theta
-> $$
+$$\theta^\top X^\top y = y^\top X \theta$$
 
 
 **Proof**
-1. Dimensional Analysis | first, we analyze the dimensions of the term $y^\top X \theta$: $\underbrace{y^\top}_{(1 \times n)} \times \underbrace{X}_{(n \times p)} \times \underbrace{\theta}_{(p \times 1)} \rightarrow (1 \times p) \times (p \times 1) \rightarrow (1 \times 1)$ Since the result is a $1 \times 1$ matrix, let $s = y^\top X \theta$, where $s$ is a scalar. 
+**Dimensional Analysis** | first, we analyze the dimensions of the term $y^\top X \theta$: 
 
-2. Property of Scalars | For any scalar $s \in \mathbb{R}$, the transpose of the scalar is equal to itself: $$s^\top = s$$
-3. Application of Transpose Properties | By applying the transpose operation to $s$ (using the property $(ABC)^\top = C^\top B^\top A^\top$), we get: 
+$$
+\underbrace{y^\top}_{(1 \times n)} \times \underbrace{X}_{(n \times p)} \times \underbrace{\theta}_{(p \times 1)} \rightarrow (1 \times p) \times (p \times 1) \rightarrow (1 \times 1)
+$$
 
-> $$
-> \begin{aligned} s^\top &= (y^\top X \theta)^\top \\ &= \theta^\top X^\top (y^\top)^\top \\ &= \theta^\top X^\top y \end> {aligned}
-> $$
+Since the result is a $1 \times 1$ matrix, let $s = y^\top X \theta$, where $s$ is a scalar. 
 
-4. Conclusion | Since $s = s^\top$, it follows that: $$y^\top X \theta = \theta^\top X^\top y$$
----
-### Derivative of Quadratic Form
+**Property of Scalars** | For any scalar $s \in \mathbb{R}$, the transpose of the scalar is equal to itself: 
+
+$$
+s^\top = s
+$$
+
+**Application of Transpose Properties** | By applying the transpose operation to $s$ (using the property $(ABC)^\top = C^\top B^\top A^\top$), we get: 
+$$
+\begin{aligned} s^\top &= (y^\top X \theta)^\top \\ &= \theta^\top X^\top (y^\top)^\top \\ &= \theta^\top X^\top y \end{aligned}
+$$
+
+**Conclusion** | Since $s = s^\top$, it follows that: 
+
+$$
+y^\top X \theta = \theta^\top X^\top y
+$$
+
+### 2.2.2. Derivative of Quadratic Form
 
 **Assumption**
-
 Let vectors and matrices be defined as follows:
 - $\theta \in \mathbb{R}^n$ is a column vector.
 - $A \in \mathbb{R}^{n \times n}$ is a square matrix (not necessarily symmetric yet).
@@ -248,58 +248,84 @@ Let vectors and matrices be defined as follows:
 
 **Claim**
 The gradient of $f(\theta)$ with respect to $\theta$ is:
-$$\nabla_{\theta}(\theta^\top A\theta) = (A + A^\top)\theta$$
+
+$$
+\nabla_{\theta}(\theta^\top A\theta) = (A + A^\top)\theta
+$$
+
 (Corollary: If $A$ is symmetric, i.e., $A = A^\top$, then $\nabla_{\theta} f = 2A\theta$.)
 
 **Proof**
-1. Perturbation | Consider a small change $d\theta$ in $\theta$. We evaluate the function at $\theta + d\theta$:
-$$f(\theta + d\theta) = (\theta + d\theta)^\top A (\theta + d\theta)$$
 
-2. Expansion | Distribute the terms:
+**Perturbation** | Consider a small change $d\theta$ in $\theta$. We evaluate the function at $\theta + d\theta$:
 
-$$\begin{aligned} f(\theta + d\theta) &= (\theta^\top + d\theta^\top) A (\theta + d\theta) \\ &= \underbrace{\theta^\top A \theta}_{\text{original } f(\theta)} + (d\theta)^\top A \theta + \theta^\top A d\theta + \underbrace{(d\theta)^\top A d\theta}_{\text{higher-order term}} \end{aligned}$$
-3. Total Differential | The total differential $df$ consists of the linear terms in $d\theta$. The term $(d\theta)^\top A d\theta$ is second-order (quadratic in $d\theta$), so it approaches 0 faster than $d\theta$. Thus, we ignore it for the first derivative:
-$$df \approx (d\theta)^\top A \theta + \theta^\top A d\theta$$
-4. Scalar Transpose Property | Note that $(d\theta)^\top A \theta$ results in a scalar. A scalar is equal to its transpose ($s = s^\top$). Thus:
-$$(d\theta)^\top A \theta = \left( (d\theta)^\top A \theta \right)^\top = \theta^\top A^\top d\theta$$
-5. Substitution and Factoring | Substitute this back into the expression for $df$:
-$$\begin{aligned} df &= \theta^\top A^\top d\theta + \theta^\top A d\theta \\ &= \theta^\top (A^\top + A) d\theta \end{aligned}$$
-6. Identification of Gradient | By the definition of the gradient, the differential is given by $df = (\nabla_\theta f)^\top d\theta$. Comparing this with our result:
-$$(\nabla_\theta f)^\top = \theta^\top (A^\top + A)$$
+$$
+f(\theta + d\theta) = (\theta + d\theta)^\top A (\theta + d\theta)
+$$
+
+**Expansion** | Distribute the terms:
+
+$$
+\begin{aligned} f(\theta + d\theta) &= (\theta^\top + d\theta^\top) A (\theta + d\theta) \\ &= \underbrace{\theta^\top A \theta}_{\text{original } f(\theta)} + (d\theta)^\top A \theta + \theta^\top A d\theta + \underbrace{(d\theta)^\top A d\theta}_{\text{higher-order term}} \end{aligned}
+$$
+
+**Total Differential** | The total differential $df$ consists of the linear terms in $d\theta$. The term $(d\theta)^\top A d\theta$ is second-order (quadratic in $d\theta$), so it approaches 0 faster than $d\theta$. Thus, we ignore it for the first derivative:
+$$
+df \approx (d\theta)^\top A \theta + \theta^\top A d\theta
+$$
+
+**Scalar Transpose Property** | Note that $(d\theta)^\top A \theta$ results in a scalar. A scalar is equal to its transpose ($s = s^\top$). Thus:
+
+$$
+(d\theta)^\top A \theta = \left( (d\theta)^\top A \theta \right)^\top = \theta^\top A^\top d\theta
+$$
+
+**Substitution and Factoring** | Substitute this back into the expression for $df$:
+
+$$
+\begin{aligned} df &= \theta^\top A^\top d\theta + \theta^\top A d\theta \\ &= \theta^\top (A^\top + A) d\theta \end{aligned}
+$$
+
+**Identification of Gradient** | By the definition of the gradient, the differential is given by $df = (\nabla_\theta f)^\top d\theta$. Comparing this with our result:
+
+$$
+(\nabla_\theta f)^\top = \theta^\top (A^\top + A)
+$$
+
 Taking the transpose of both sides:
 
-$$\nabla_\theta f = (A + A^\top)\theta$$
+$$
+\nabla_\theta f = (A + A^\top)\theta
+$$
 
 **Corollary**
 If we assume $A$ is symmetric ($A^\top = A$), the formula simplifies:
 $$\nabla_\theta f = (A + A)\theta = 2A\theta$$
 Derivative of Quadratic Form
 $\nabla_{\theta}(\theta^\top A\theta)=(A+A^\top)\theta$, and if $A$ is symmetric, $2A\theta$ When $\theta \mapsto \theta + d\theta$,
-$$\begin{align}  
+$$  
+    \begin{align}  
     f(\theta+d\theta)& =(\theta+d\theta)^\top A (\theta+d\theta)\  
     & = \underbrace{\theta^\top A \theta}_{\text{original term}} + (d\theta)^\top A \theta+ \theta^\top A d\theta+\underbrace{(d\theta)^\top A d\theta}_{\text{second derivate}}  
-    \end{align}$$
-
-Thus,$$  
+    \end{align}  
+ $$
+Thus,      $$  
     \begin{align}  
     df&=(d\theta)^\top A \theta+\theta^\top A d\theta\  
     &=\theta^\top A^\top(d\theta)+\theta^\top A d\theta\  
     &=\theta^\top(A^\top+A)(d\theta)  
     \end{align}  
     $$
-
 ---
-
-### Derivative of Linear Form
-
+**Derivative of Linear Form**
 $\nabla_{\theta}(b^\top \theta)=b$
-
 ---
 
-</details>
 
-## 2.2. How GD is applied to ML through an example
-**2.2.1. Example of GD with ML**
+
+
+## 2.3. How GD is applied to ML through an example
+**2.3.1. Example of GD with ML**
 In this example, we set $\eta =0.01$.
 Example: Gradient Descent for a Quadratic Regression Model  
 Let the data be:  
