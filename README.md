@@ -133,7 +133,7 @@ $$
 In other words, the goal is to minimize the average loss over all data points. Just like the previous GD example where we updated $x$ to find the minimum of $f(x)$, we update $\theta$ in the direction that reduces the gradient of the loss, and continue GD until the loss becomes no longer decreases.
 
 ## 2.1. Machine learning with gradient descent
-Let's examine the training process with an example. To apply Gradient Descent, we first need to differentiate the model. Given the model $\hat{y} = \theta_1 x^2 + \theta_2 x + \theta_3$ and the basis vector $[x^2, \; x, \; 1]^\top$, we can express the system for a dataset $D$ as follows:
+Let's examine the training process with an example. To apply Gradient Descent, we first need to differentiate the model. Given the model $\hat{y} = \theta_1 x^2 + \theta_2 x + \theta_3$ and the basis vector $[x^2, x, 1]^\top$, we can express the system for a dataset $D$ as follows:
 
 $$
 \hat{\mathbf{y}} =
@@ -198,7 +198,7 @@ $$
 $$
 
 
-## 2.2. Proof of Differentiation rules (optional)
+## 2.2. Proof of Differentiation Rules (optional)
 
 ### 2.2.1. Scalar Transpose
 
@@ -218,7 +218,7 @@ $$
 
 **Proof**
 
-_Dimensional Analysis_ | first, we analyze the dimensions of the term $y^\top X \theta$: 
+[Dimensional Analysis] | first, we analyze the dimensions of the term $y^\top X \theta$: 
 
 $$
 \underbrace{y^\top}_{(1 \times n)} \times \underbrace{X}_{(n \times p)} \times \underbrace{\theta}_{(p \times 1)} \rightarrow (1 \times p) \times (p \times 1) \rightarrow (1 \times 1)
@@ -581,7 +581,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-### 2.1.4. The result of code
+### 2.3.4. The result of code
 
 <table align="center">
   <tr>
@@ -632,7 +632,7 @@ $$
 L(\theta|x)=log\; P(x|\theta)=\sum^n_{i=1}log\; P(x_i|\theta)
 $$
 
-**Strict Difference Between PDF and Likelihood**
+**Strict Difference Between PDF and Likelihood (optional)**
 
 Strictly defined, Likelihood and PDF are different. While Likelihood can be called a PDF value because it represents the height of the probability distribution, strictly speaking, the two are different concepts.
 
