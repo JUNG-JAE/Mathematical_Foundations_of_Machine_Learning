@@ -124,9 +124,7 @@ Thus, Gradient Descent always updates the parameters in a direction that decreas
 <br>
 
 # 2. Machine Learning from optimization persepctive
-Let us redefine model training in ML from the viewpoint of optimization. The goal of machine learning is to make the model represent the underlying data distribution well. Therefore, the objective is to reduce the loss between the real data and the model’s output.
-
-Given a dataset with $n$ samples  $D={(x_i, y_i)}^{n}_{i=1}$ and a model  $f_{\theta}(x):\theta_1 x^2+\theta_2 x + \theta_3$, suppose we use MSE (Mean Squared Error) $L(\theta)=\frac{1}{n}\sum^{n}_{i=1}(\hat{y}_i-y_i)^2$ to measure the loss, where $\hat y$ is the model output. Then the optimization problem in machine learning is defined as follows:  
+Let us redefine model training in ML from the viewpoint of optimization. The goal of machine learning is to make the model represent the underlying data distribution well. **Therefore, the objective is to reduce the loss between the real data and the model’s output.** Consider a dataset $D=\{(x_i, y_i)\}_{i=1}^{n}$ and a model $f_{\theta}(x) = \theta_1 x^2+\theta_2 x + \theta_3$. Using the Mean Squared Error (MSE) loss, the optimization problem is defined as follows:
 
 $$
 \min_{\theta_1,\theta_2,\theta_3\in\mathbb{R}} \frac{1}{n}\sum^{n}_{i=1}(\theta_1 x^2 + \theta_2 x + \theta_3-y_i)^2
@@ -203,17 +201,22 @@ $$
 ### 2.2.1. Scalar Transpose
 
 **Assumption**
+
 Let the dimensions of the matrix and vectors be defined as follows:
  - $X \in \mathbb{R}^{n \times p}$
  - $\theta \in \mathbb{R}^{p \times 1}$ (or simply $\mathbb{R}^p$)
  - $y \in \mathbb{R}^{n \times 1}$ (or simply $\mathbb{R}^n$)   
 
-**Claim**   
-$$\theta^\top X^\top y = y^\top X \theta$$
+**Claim**
+
+$$
+\theta^\top X^\top y = y^\top X \theta
+$$
 
 
 **Proof**
-**Dimensional Analysis** | first, we analyze the dimensions of the term $y^\top X \theta$: 
+
+_Dimensional Analysis_ | first, we analyze the dimensions of the term $y^\top X \theta$: 
 
 $$
 \underbrace{y^\top}_{(1 \times n)} \times \underbrace{X}_{(n \times p)} \times \underbrace{\theta}_{(p \times 1)} \rightarrow (1 \times p) \times (p \times 1) \rightarrow (1 \times 1)
@@ -221,18 +224,18 @@ $$
 
 Since the result is a $1 \times 1$ matrix, let $s = y^\top X \theta$, where $s$ is a scalar. 
 
-**Property of Scalars** | For any scalar $s \in \mathbb{R}$, the transpose of the scalar is equal to itself: 
+_Property of Scalars_ | For any scalar $s \in \mathbb{R}$, the transpose of the scalar is equal to itself: 
 
 $$
 s^\top = s
 $$
 
-**Application of Transpose Properties** | By applying the transpose operation to $s$ (using the property $(ABC)^\top = C^\top B^\top A^\top$), we get: 
+_Application of Transpose Properties_ | By applying the transpose operation to $s$ (using the property $(ABC)^\top = C^\top B^\top A^\top$), we get: 
 $$
 \begin{aligned} s^\top &= (y^\top X \theta)^\top \\ &= \theta^\top X^\top (y^\top)^\top \\ &= \theta^\top X^\top y \end{aligned}
 $$
 
-**Conclusion** | Since $s = s^\top$, it follows that: 
+_Conclusion_ | Since $s = s^\top$, it follows that: 
 
 $$
 y^\top X \theta = \theta^\top X^\top y
@@ -241,12 +244,14 @@ $$
 ### 2.2.2. Derivative of Quadratic Form
 
 **Assumption**
+
 Let vectors and matrices be defined as follows:
 - $\theta \in \mathbb{R}^n$ is a column vector.
 - $A \in \mathbb{R}^{n \times n}$ is a square matrix (not necessarily symmetric yet).
 - $f(\theta) = \theta^\top A \theta$ is a scalar function (Quadratic Form).
 
 **Claim**
+
 The gradient of $f(\theta)$ with respect to $\theta$ is:
 
 $$
@@ -257,36 +262,36 @@ $$
 
 **Proof**
 
-**Perturbation** | Consider a small change $d\theta$ in $\theta$. We evaluate the function at $\theta + d\theta$:
+_Perturbation_ | Consider a small change $d\theta$ in $\theta$. We evaluate the function at $\theta + d\theta$:
 
 $$
 f(\theta + d\theta) = (\theta + d\theta)^\top A (\theta + d\theta)
 $$
 
-**Expansion** | Distribute the terms:
+_Expansion_ | Distribute the terms:
 
 $$
 \begin{aligned} f(\theta + d\theta) &= (\theta^\top + d\theta^\top) A (\theta + d\theta) \\ &= \underbrace{\theta^\top A \theta}_{\text{original } f(\theta)} + (d\theta)^\top A \theta + \theta^\top A d\theta + \underbrace{(d\theta)^\top A d\theta}_{\text{higher-order term}} \end{aligned}
 $$
 
-**Total Differential** | The total differential $df$ consists of the linear terms in $d\theta$. The term $(d\theta)^\top A d\theta$ is second-order (quadratic in $d\theta$), so it approaches 0 faster than $d\theta$. Thus, we ignore it for the first derivative:
+_Total Differential_ | The total differential $df$ consists of the linear terms in $d\theta$. The term $(d\theta)^\top A d\theta$ is second-order (quadratic in $d\theta$), so it approaches 0 faster than $d\theta$. Thus, we ignore it for the first derivative:
 $$
 df \approx (d\theta)^\top A \theta + \theta^\top A d\theta
 $$
 
-**Scalar Transpose Property** | Note that $(d\theta)^\top A \theta$ results in a scalar. A scalar is equal to its transpose ($s = s^\top$). Thus:
+_Scalar Transpose Property_ | Note that $(d\theta)^\top A \theta$ results in a scalar. A scalar is equal to its transpose ($s = s^\top$). Thus:
 
 $$
 (d\theta)^\top A \theta = \left( (d\theta)^\top A \theta \right)^\top = \theta^\top A^\top d\theta
 $$
 
-**Substitution and Factoring** | Substitute this back into the expression for $df$:
+_Substitution and Factoring_ | Substitute this back into the expression for $df$:
 
 $$
 \begin{aligned} df &= \theta^\top A^\top d\theta + \theta^\top A d\theta \\ &= \theta^\top (A^\top + A) d\theta \end{aligned}
 $$
 
-**Identification of Gradient** | By the definition of the gradient, the differential is given by $df = (\nabla_\theta f)^\top d\theta$. Comparing this with our result:
+_Identification of Gradient_ | By the definition of the gradient, the differential is given by $df = (\nabla_\theta f)^\top d\theta$. Comparing this with our result:
 
 $$
 (\nabla_\theta f)^\top = \theta^\top (A^\top + A)
@@ -299,43 +304,55 @@ $$
 $$
 
 **Corollary**
+
 If we assume $A$ is symmetric ($A^\top = A$), the formula simplifies:
-$$\nabla_\theta f = (A + A)\theta = 2A\theta$$
-Derivative of Quadratic Form
-$\nabla_{\theta}(\theta^\top A\theta)=(A+A^\top)\theta$, and if $A$ is symmetric, $2A\theta$ When $\theta \mapsto \theta + d\theta$,
+
+$$
+\nabla_\theta f = (A + A)\theta = 2A\theta
+$$
+
+Derivative of Quadratic Form $\nabla_{\theta}(\theta^\top A\theta)=(A+A^\top)\theta$, and if $A$ is symmetric, $2A\theta$ When $\theta \mapsto \theta + d\theta$,
+
 $$  
     \begin{align}  
     f(\theta+d\theta)& =(\theta+d\theta)^\top A (\theta+d\theta)\  
     & = \underbrace{\theta^\top A \theta}_{\text{original term}} + (d\theta)^\top A \theta+ \theta^\top A d\theta+\underbrace{(d\theta)^\top A d\theta}_{\text{second derivate}}  
     \end{align}  
- $$
-Thus,      $$  
+$$
+
+Thus,      
+
+$$  
     \begin{align}  
     df&=(d\theta)^\top A \theta+\theta^\top A d\theta\  
     &=\theta^\top A^\top(d\theta)+\theta^\top A d\theta\  
     &=\theta^\top(A^\top+A)(d\theta)  
     \end{align}  
-    $$
----
-**Derivative of Linear Form**
+$$
+
+### 2.2.3. Derivative of Linear Form
+
 $\nabla_{\theta}(b^\top \theta)=b$
----
-
-
-
 
 ## 2.3. How GD is applied to ML through an example
-**2.3.1. Example of GD with ML**
+
+### 2.3.1. Example of GD with ML
 In this example, we set $\eta =0.01$.
 Example: Gradient Descent for a Quadratic Regression Model  
 Let the data be:  
-$$x = [0,1,2,3], \qquad y = [1,2,5,10], \qquad n=4$$
+
+$$
+x = [0,1,2,3], \qquad y = [1,2,5,10], \qquad n=4
+$$
 
 The model is  
+
 $$  
 \hat{y} = \theta_1 x^2 + \theta_2 x + \theta_3  
 $$
+
 and the corresponding design matrix is  
+
 $$  
 X =
 \begin{bmatrix}
@@ -356,61 +373,74 @@ y=
 1\\2\\5\\10
 \end{bmatrix}. 
 $$
-Since the loss function is MSE:  
-$$  
-L(\theta) = \frac{1}{n}|X\theta - y|_2^2.  
-$$
-The gradient is
+
+Since the loss function is MSE: $L(\theta) = \frac{1}{n}|X\theta - y|_2^2.$ The gradient is:
+
 $$  
 \nabla_{\theta} L(\theta)  
 = \frac{2}{n} X^\top (X\theta - y),  
 $$
+
 Thus the GD update rule becomes  
+
 $$  
 \theta_{k+1}  
 = \theta_k - \eta \nabla_\theta L(\theta_k)  
 = \theta_k - \eta \cdot \frac{2}{n} X^\top(X\theta_k - y),  
 $$
 
-The initial value is  
-$$  
-\theta_0 = (0,0,0)^\top  
-$$
 
 ### 2.1.2. Iteration 0 → 1 Detailed Calculation
-1. Prediction
-   $$X\theta_0 = \begin{bmatrix}0 \\ 0 \\ 0 \\ 0\end{bmatrix}$$
-2. Residual
-   $$r_0 = X\theta_0 - y = \begin{bmatrix}-1 \\ -2 \\ -5 \\ -10\end{bmatrix}$$
-3. Gradient
-   $$\nabla L(\theta_0)= \frac{2}{4} X^\top r_0= \begin{bmatrix}-56 \\ -21 \\ -9 \end{bmatrix}$$
-4. Update
-   $$\theta_1= \theta_0 - 0.01 \nabla L(\theta_0)=\begin{bmatrix}0.56 \\ 0.21 \\ 0.09\end{bmatrix}.$$
+1. Initial value
+
+    $$  
+    \theta_0 = (0,0,0)^\top  
+    $$
+
+2. Prediction
+   
+   $$
+   X\theta_0 = \begin{bmatrix}0 \\ 0 \\ 0 \\ 0\end{bmatrix}
+   $$
+
+3. Residual
+   
+   $$
+   r_0 = X\theta_0 - y = \begin{bmatrix}-1 \\ -2 \\ -5 \\ -10\end{bmatrix}
+   $$
+
+4. Gradient
+   
+   $$
+   \nabla L(\theta_0)= \frac{2}{4} X^\top r_0= \begin{bmatrix}-56 \\ -21 \\ -9 \end{bmatrix}
+   $$
+
+5. Update
+   
+   $$
+   \theta_1= \theta_0 - 0.01 \nabla L(\theta_0)=\begin{bmatrix}0.56 \\ 0.21 \\ 0.09\end{bmatrix}.
+   $$
 The following table shows the parameters and loss values from $k=0$ to $k=10$:
-$$  
-\begin{array}{c|c|c|c|c}
-\hline
-k & \theta_{1} & \theta_{2} & \theta_{3} & L(\theta_k) \\
-\hline
-0  & 0.000000 & 0.000000 & 0.000000 & 32.500000 \\
-1  & 0.560000 & 0.210000 & 0.090000 & 6.291950 \\
-2  & 0.801500 & 0.301800 & 0.132700 & 1.377884 \\
-3  & 0.905152 & 0.342423 & 0.154887 & 0.453345 \\
-4  & 0.949149 & 0.360879 & 0.168156 & 0.276331 \\
-5  & 0.967337 & 0.369726 & 0.177526 & 0.239449 \\
-6  & 0.974364 & 0.374399 & 0.185170 & 0.228903 \\
-7  & 0.976572 & 0.377250 & 0.192029 & 0.223371 \\
-8  & 0.976705 & 0.379299 & 0.198511 & 0.218856 \\
-9  & 0.975950 & 0.380986 & 0.204793 & 0.214608 \\
-10 & 0.974821 & 0.382502 & 0.210951 & 0.210484 \\
-\hline
-\end{array} 
-$$
+
+| k  | θ₁        | θ₂        | θ₃        | L(θₖ)      |
+|----|-----------|-----------|-----------|------------|
+| 0  | 0.000000  | 0.000000  | 0.000000  | 32.500000  |
+| 1  | 0.560000  | 0.210000  | 0.090000  | 6.291950   |
+| 2  | 0.801500  | 0.301800  | 0.132700  | 1.377884   |
+| 3  | 0.905152  | 0.342423  | 0.154887  | 0.453345   |
+| 4  | 0.949149  | 0.360879  | 0.168156  | 0.276331   |
+| 5  | 0.967337  | 0.369726  | 0.177526  | 0.239449   |
+| 6  | 0.974364  | 0.374399  | 0.185170  | 0.228903   |
+| 7  | 0.976572  | 0.377250  | 0.192029  | 0.223371   |
+| 8  | 0.976705  | 0.379299  | 0.198511  | 0.218856   |
+| 9  | 0.975950  | 0.380986  | 0.204793  | 0.214608   |
+| 10 | 0.974821  | 0.382502  | 0.210951  | 0.210484   |
 
 After 10 updates, the loss decreases from $32.5$ to about $0.21$, and the model parameters $\theta$ gradually converge to values that fit the data well.
 
 ### 2.1.3. ML with optimization code
-```python
+
+```python**
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
@@ -545,9 +575,8 @@ plt.show()
 <br>
 
 # 3.  Definition of Maximum Likelihood Estimation
-> The notation in this section differs from the previous sections.
 
-Next, to explain ML from the perspective of a probability model, we first explain MLE. Maximum Likelihood Estimation (MLE) is a parametric method for estimating probability distributions. Given a set of observed sample data $x=(x_1, x_2, ... , x_n)$ from a probability density function $p(x|\theta)$ parameterized by $\theta=(\theta_1,\theta_2,...,\theta_m)$, it is a method to estimate the parameters $\theta=(\theta_1,\theta_2,...,\theta_m)$.
+Next, to explain ML from the perspective of a probability model, we first explain MLE. Maximum Likelihood Estimation (MLE) is a parametric method for estimating probability distributions. The notation in this section differs from the previous sections. Given a set of observed sample data $x=(x_1, x_2, ... , x_n)$ from a probability density function $p(x|\theta)$ parameterized by $\theta=(\theta_1,\theta_2,...,\theta_m)$, it is a method to estimate the parameters $\theta=(\theta_1,\theta_2,...,\theta_m)$.
 
 ## 3.1. Intuition of MLE
 To understand the core idea of MLE, let's consider a very simple example as below. Suppose we obtained 5 data points as follows: $x=\{1,4,5,6,9\}$. At this time, looking at the figure below, from which curve is it more probable that the data $x$ was extracted: the green curve or the yellow curve? 
@@ -563,60 +592,92 @@ Likelihood refers to the possibility that observed samples came from a specific 
 
 Mathematically, it is defined as follows:
 
-$$P(x|\theta) = \prod_{k=1}^n P(x_k|\theta)$$
+$$
+P(x|\theta) = \prod_{k=1}^n P(x_k|\theta)
+$$
+
 The goal of MLE is to find the $\hat {\theta}$ that maximizes the value of the equation above.
 
 Usually, the log-likelihood function is used for computational convenience. Since the log function is a monotonically increasing function, the input value of the domain that yields the maximum value is the same whether finding the maximum of the likelihood function or the log-likelihood function. Due to the properties of logarithms, the product is converted into a sum.
-$$L(\theta|x)=log\; P(x|\theta)=\sum^n_{i=1}log\; P(x_i|\theta)$$
 
-<details>
-<summary><b>Strict Difference Between PDF and Likelihood</b></summary>
+$$
+L(\theta|x)=log\; P(x|\theta)=\sum^n_{i=1}log\; P(x_i|\theta)
+$$
+
+**Strict Difference Between PDF and Likelihood**
+
 Strictly defined, Likelihood and PDF are different. While Likelihood can be called a PDF value because it represents the height of the probability distribution, strictly speaking, the two are different concepts.
 
-**PDF**
-$p(x \mid \theta)$ is a function of $x$ where $\theta$ is fixed (e.g., $\theta = 0.5$), observing how probability/density changes as $x$ varies. Example (Bernoulli):
+**PDF**: $p(x \mid \theta)$ is a function of $x$ where $\theta$ is fixed (e.g., $\theta = 0.5$), observing how probability/density changes as $x$ varies. Example (Bernoulli):
 
-$$p(x \mid \theta) = \begin{cases} \theta & x = 1 \\ 1-\theta & x = 0 \end{cases} $$
+$$
+p(x \mid \theta) = \begin{cases} \theta & x = 1 \\ 1-\theta & x = 0 \end{cases}
+$$
+
 Here, if we fix $\theta = 0.7$, then $p(1 \mid 0.7) = 0.7$, $p(0 \mid 0.7) = 0.3$. In other words, it looks at "how the probability changes depending on whether the data $x$ is $0$ or $1$."
 
-**Likelihood**
-$L(\theta \mid x)$ is a function of $\theta$. This time, conversely, $x$ is fixed as an already observed value (e.g., $x = 1$), and $\theta$ is viewed as the variable.
-$$L(\theta \mid x=1) = p(x=1 \mid \theta) = \theta $$
+**Likelihood**: $L(\theta \mid x)$ is a function of $\theta$. This time, conversely, $x$ is fixed as an already observed value (e.g., $x = 1$), and $\theta$ is viewed as the variable.
+
+$$
+L(\theta \mid x=1) = p(x=1 \mid \theta) = \theta
+$$
+
 Here:
 + $\theta = 0.2 \Rightarrow L(0.2 \mid x=1) = 0.2$
 + $\theta = 0.5 \Rightarrow L(0.5 \mid x=1) = 0.5$
 + $\theta = 0.9 \Rightarrow L(0.9 \mid x=1) = 0.9$
-In other words, this function looks at "the plausibility (likelihood) of this data appearing when $\theta$ is 0.2."
 
-**In short, the values are the same, but the functions are different!**
-
-</details>
+In other words, this function looks at "the plausibility (likelihood) of this data appearing when $\theta$ is 0.2." **In short, the values are the same, but the functions are different!**
 
 ## 3.3. How to find the maximum of the likelihood function
 Ultimately, Maximum Likelihood Estimation can be described as a method to find the maximum value of the Likelihood function. Therefore, we need to find the maximum value of the log-likelihood. The common ways to find the maximum value of a function is to use the differential coefficient. That is, by partially differentiating with respect to the parameter $\theta$ we want to find as shown below, and finding the $\theta$ that makes the value 0, we can find the $\theta$ that maximizes the likelihood function. Of course, approaches like Gradient Ascent (GA) can also be used to find $\theta$.
-$$\frac{\partial}{\partial\theta}L(\theta|x)=\frac{\partial}{\partial\theta}log\; P(x|\theta)=\sum^n_{i=1}\frac{\partial}{\partial\theta}log\; P(x_i|\theta)=0$$
+
+$$
+\frac{\partial}{\partial\theta}L(\theta|x)=\frac{\partial}{\partial\theta}log\; P(x|\theta)=\sum^n_{i=1}\frac{\partial}{\partial\theta}log\; P(x_i|\theta)=0
+$$
 
 ## 3.4. Example of MLE
 Let's estimate the mean and variance of the population distribution using the values of samples $x_1, x_2, ..., x_n$ extracted from a normal distribution where the mean $\mu$ and variance $\sigma^2$ are unknown. As you may already know, if samples are extracted as above, the estimated values for the population mean and population variance are:
-$$\begin{align} & \hat{\mu} = \frac{1}{n} \sum_{i=1}^{n} x_i\\ & \hat{\sigma}^2 = \frac{1}{n} \sum_{i=1}^{n} (x_i - \mu)^2 \end{align}$$
+
+$$
+\begin{align} & \hat{\mu} = \frac{1}{n} \sum_{i=1}^{n} x_i\\ & \hat{\sigma}^2 = \frac{1}{n} \sum_{i=1}^{n} (x_i - \mu)^2 \end{align}
+$$
 
 Let's verify this using MLE.
 
 Assuming each sample is extracted from a normal distribution, the sampling distribution of each sample is:
 
-$$f_{\mu, \sigma^2}(x_i) = \frac{1}{\sigma \sqrt{2\pi}}\exp\left(-\frac{(x_i - \mu)^2}{2\sigma^2}\right)$$
+$$
+f_{\mu, \sigma^2}(x_i) = \frac{1}{\sigma \sqrt{2\pi}}\exp\left(-\frac{(x_i - \mu)^2}{2\sigma^2}\right)$$
 and let's assume that $x_1, x_2, ..., x_n$ were all extracted independently. Then the likelihood is:
-$$P(x \mid \theta) = \prod_{i=1}^{n} f_{\mu, \sigma^2}(x_i) = \prod_{i=1}^{n} \frac{1}{\sigma \sqrt{2\pi}} \exp\left( -\frac{(x_i - \mu)^2}{2\sigma^2} \right)$$
+$$P(x \mid \theta) = \prod_{i=1}^{n} f_{\mu, \sigma^2}(x_i) = \prod_{i=1}^{n} \frac{1}{\sigma \sqrt{2\pi}} \exp\left( -\frac{(x_i - \mu)^2}{2\sigma^2} \right)
+$$
+
 and the log-likelihood is as follows:
-$$\begin{align*} L(\theta \mid x) &= \sum_{i=1}^{n} \log \left( \frac{1}{\sigma \sqrt{2\pi}} \exp\left(-\frac{(x_i - \mu)^2}{2\sigma^2} \right) \right) \\[6pt] &= \sum_{i=1}^{n} \left\{ \log\left( \exp\left( -\frac{(x_i - \mu)^2}{2\sigma^2} \right) \right) - \log(\sigma \sqrt{2\pi}) \right\} \\[6pt] &= \sum_{i=1}^{n} \left\{ -\frac{(x_i - \mu)^2}{2\sigma^2} - \log(\sigma) - \log(\sqrt{2\pi}) \right\} \end{align*}$$
+
+$$
+\begin{align*} L(\theta \mid x) &= \sum_{i=1}^{n} \log \left( \frac{1}{\sigma \sqrt{2\pi}} \exp\left(-\frac{(x_i - \mu)^2}{2\sigma^2} \right) \right) \\[6pt] &= \sum_{i=1}^{n} \left\{ \log\left( \exp\left( -\frac{(x_i - \mu)^2}{2\sigma^2} \right) \right) - \log(\sigma \sqrt{2\pi}) \right\} \\[6pt] &= \sum_{i=1}^{n} \left\{ -\frac{(x_i - \mu)^2}{2\sigma^2} - \log(\sigma) - \log(\sqrt{2\pi}) \right\} \end{align*}
+$$
+
 Therefore, if we partially differentiate $L(\theta|x)$ with respect to $\mu$,
-$$\begin{align*} \frac{\partial L(\theta \mid x)}{\partial \mu} &= -\frac{1}{2\sigma^{2}} \sum_{i=1}^{n} \frac{\partial}{\partial \mu} \left( x_i^{\,2} - 2x_i \mu + \mu^{2} \right) \\[6pt] &= -\frac{1}{2\sigma^{2}} \sum_{i=1}^{n} \left( -2x_i + 2\mu \right) \\[6pt] &= \frac{1}{\sigma^{2}} \sum_{i=1}^{n} (x_i - \mu) \\[6pt] &= \frac{1}{\sigma^{2}} \left( \sum_{i=1}^{n} x_i - n\mu \right) = 0 \end{align*}$$
+
+$$
+\begin{align*} \frac{\partial L(\theta \mid x)}{\partial \mu} &= -\frac{1}{2\sigma^{2}} \sum_{i=1}^{n} \frac{\partial}{\partial \mu} \left( x_i^{\,2} - 2x_i \mu + \mu^{2} \right) \\[6pt] &= -\frac{1}{2\sigma^{2}} \sum_{i=1}^{n} \left( -2x_i + 2\mu \right) \\[6pt] &= \frac{1}{\sigma^{2}} \sum_{i=1}^{n} (x_i - \mu) \\[6pt] &= \frac{1}{\sigma^{2}} \left( \sum_{i=1}^{n} x_i - n\mu \right) = 0 \end{align*}
+$$
+
 Therefore, the estimator of the population mean that yields the maximum likelihood is as follows:
-$$\hat{\mu} = \frac{1}{n} \sum_{i=1}^{n} x_i$$
+
+$$
+\hat{\mu} = \frac{1}{n} \sum_{i=1}^{n} x_i$$
 On the other hand, if we partially differentiate $L(\theta|x)$ with respect to the standard deviation $\sigma$,
-$$\begin{align*} \frac{\partial L(\theta \mid x)}{\partial \sigma} &= -\frac{n}{\sigma} - \frac{1}{2} \sum_{i=1}^{n} (x_i - \mu)^2 \frac{\partial}{\partial \sigma} \left( \frac{1}{\sigma^{2}} \right) \\[6pt] &= -\frac{n}{\sigma} + \frac{1}{\sigma^{3}} \sum_{i=1}^{n} (x_i - \mu)^2 = 0 \end{align*}$$
+$$\begin{align*} \frac{\partial L(\theta \mid x)}{\partial \sigma} &= -\frac{n}{\sigma} - \frac{1}{2} \sum_{i=1}^{n} (x_i - \mu)^2 \frac{\partial}{\partial \sigma} \left( \frac{1}{\sigma^{2}} \right) \\[6pt] &= -\frac{n}{\sigma} + \frac{1}{\sigma^{3}} \sum_{i=1}^{n} (x_i - \mu)^2 = 0 \end{align*}
+$$
+
 The estimator of the population variance that yields the maximum likelihood is as follows:
-$$\hat{\sigma}^2 = \frac{1}{n} \sum_{i=1}^{n} (x_i - \mu)^2$$
+
+$$
+\hat{\sigma}^2 = \frac{1}{n} \sum_{i=1}^{n} (x_i - \mu)^2
+$$
 
 
 # 4. Machine Learning from the MLE Perspective
@@ -624,46 +685,90 @@ The following explains ML through MLE, which is the perspective of probabilistic
 
 ## 4.1. Basic Assumptions on Data
 In regression, it is usually assumed that:
-$$y = f(x;\theta) + \varepsilon $$
+
+$$
+y = f(x;\theta) + \varepsilon
+$$
+
 - $x$: Input data
 - $y$: Target/Ground truth
 - $f(x;\theta)$: The function we want to learn (neural network, linear model, etc.)
 - $\varepsilon$: Error (noise)
 
 Here, "Gaussian-based" usually means that the error follows a Gaussian distribution with mean 0 and variance $\sigma^2$, such as $\varepsilon \sim \mathcal{N}(0, \sigma^2)$. Then, for a given $x$ and parameter $\theta$, the conditional distribution of $y$ is as follows:
-$$y \mid x; \theta \sim \mathcal{N}(f(x;\theta), \sigma^2) $$
+
+$$
+y \mid x; \theta \sim \mathcal{N}(f(x;\theta), \sigma^2)
+$$
+
 In other words, "When input $x$ is given, $y$ is a value sampled from a Gaussian with mean $f(x;\theta)$ and variance $\sigma^2$." This is because constant + Gaussian = Gaussian.
 
 ## 4.2. Likelihood under Gaussian Assumption
 Based on the assumption above, for a single sample $(x_i, y_i)$:
-$$p_\theta(y_i \mid x_i) = \frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(- \frac{(y_i - f(x_i;\theta))^2}{2\sigma^2}\right) $$
+
+$$
+p_\theta(y_i \mid x_i) = \frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(- \frac{(y_i - f(x_i;\theta))^2}{2\sigma^2}\right)
+$$
+
 If the entire data $(x_i, y_i)_{i=1}^N$ is i.i.d., the likelihood can be written as a product:
-$$L(\theta) = \prod_{i=1}^N p_\theta(y_i \mid x_i) = \prod_{i=1}^N \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left(- \frac{(y_i - f(x_i;\theta))^2}{2\sigma^2} \right) $$
+
+$$
+L(\theta) = \prod_{i=1}^N p_\theta(y_i \mid x_i) = \prod_{i=1}^N \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left(- \frac{(y_i - f(x_i;\theta))^2}{2\sigma^2} \right)
+$$
+
 Using log-likelihood for computational convenience gives:
-$$\ell(\theta) = \log L(\theta) = \sum_{i=1}^N \log p_\theta(y_i \mid x_i) $$
+$$
+\ell(\theta) = \log L(\theta) = \sum_{i=1}^N \log p_\theta(y_i \mid x_i)
+$$
+
 Expanding the equation above directly:
-$$\ell(\theta) = \sum_{i=1}^N \left[-\frac{1}{2}\log(2\pi\sigma^2)- \frac{(y_i - f(x_i;\theta))^2}{2\sigma^2}\right],$$
+$$
+\ell(\theta) = \sum_{i=1}^N \left[-\frac{1}{2}\log(2\pi\sigma^2)- \frac{(y_i - f(x_i;\theta))^2}{2\sigma^2}\right],
+$$
+
 and simplifying it yields:
-$$\ell(\theta) = -\frac{N}{2}\log(2\pi\sigma^2) - \frac{1}{2\sigma^2} \sum_{i=1}^N (y_i - f(x_i;\theta))^2 $$
+
+$$
+\ell(\theta) = -\frac{N}{2}\log(2\pi\sigma^2) - \frac{1}{2\sigma^2} \sum_{i=1}^N (y_i - f(x_i;\theta))^2
+$$
+
 Key points here:
 - $-\frac{N}{2}\log(2\pi\sigma^2)$ is a constant term independent of $\theta$.
 - The only part that changes depending on $\theta$ is the sum of squared errors.
 
 ## 4.3. Connection between MLE and MSE
 MLE is the problem of maximizing the log-likelihood:
-$$\theta^\ast = \arg\max_\theta \ell(\theta) $$
+
+$$
+\theta^\ast = \arg\max_\theta \ell(\theta)
+$$
+
 In the equation above, since the constant term is irrelevant to $\theta$, we can discard it, and by changing the sign, it becomes an equivalent optimization problem:
-$$\theta^\ast = \arg\min_\theta \left[\frac{1}{2\sigma^2} \sum_{i=1}^N (y_i - f(x_i;\theta))^2\right] $$
+
+$$
+\theta^\ast = \arg\min_\theta \left[\frac{1}{2\sigma^2} \sum_{i=1}^N (y_i - f(x_i;\theta))^2\right]
+$$
+
 Here, $\frac{1}{2\sigma^2}$ is also a constant independent of $\theta$, so eventually it becomes:
-$$\theta^\ast = \arg\min_\theta \sum_{i=1}^N (y_i - f(x_i;\theta))^2 $$
+
+$$
+\theta^\ast = \arg\min_\theta \sum_{i=1}^N (y_i - f(x_i;\theta))^2
+$$
 
 Usually, the MSE we use is
-$$\mathrm{MSE}(\theta) = \frac{1}{N}\sum_{i=1}^N (y_i - f(x_i;\theta))^2 $$
+
+$$
+\mathrm{MSE}(\theta) = \frac{1}{N}\sum_{i=1}^N (y_i - f(x_i;\theta))^2
+$$
+
 Since $\frac{1}{N}$ is also a constant,
-$$\arg\min_\theta \sum_{i=1}^N (y_i - f(x_i;\theta))^2 = \arg\min_\theta \frac{1}{N}\sum_{i=1}^N (y_i - f(x_i;\theta))^2$$
+
+$$
+\arg\min_\theta \sum_{i=1}^N (y_i - f(x_i;\theta))^2 = \arg\min_\theta \frac{1}{N}\sum_{i=1}^N (y_i - f(x_i;\theta))^2
+$$
+
 thus, the two problems are identical.
 
----
 # References
 [1] “Mathematical Optimization.” _Wikipedia_, Wikimedia Foundation, en.wikipedia.org/wiki/Mathematical_optimization.
 
