@@ -181,8 +181,8 @@ L(\theta) &= \frac{1}{n}\sum^{n}_{i=1}(\hat{y}_i-y_i)^2=\frac{1}{n}\|X\theta-y\|
 \end{align}
 $$
 
-+ 3 $\rightarrow$ 4: expanding the inner product and changing multiplication order  
-+ 4 $\rightarrow$ 5: since the result is a scalar, the order can be rearranged. 
++ line 3 $\rightarrow$ 4: expanding the inner product and changing multiplication order  
++ line 4 $\rightarrow$ 5: since the result is a scalar, the order can be rearranged. 
 
 Differentiating the objective function:  
 
@@ -197,27 +197,35 @@ $$
 = \theta_k - \eta \cdot \frac{2}{n} X^\top (X\theta_k - y) 
 $$
 
-<details>
-<summary><b>Differentiation rules</b></summary>
 
 ---
+**Differentiation rules**
+
 ### Scalar Transpose
 
 **Assumption**
-Let the dimensions of the matrix and vectors be defined as follows:
- - $X \in \mathbb{R}^{n \times p}$
- - $\theta \in \mathbb{R}^{p \times 1}$ (or simply $\mathbb{R}^p$)
- - $y \in \mathbb{R}^{n \times 1}$ (or simply $\mathbb{R}^n$)   
+> Let the dimensions of the matrix and vectors be defined as follows:
+> - $X \in \mathbb{R}^{n \times p}$
+> - $\theta \in \mathbb{R}^{p \times 1}$ (or simply $\mathbb{R}^p$)
+> - $y \in \mathbb{R}^{n \times 1}$ (or simply $\mathbb{R}^n$)   
 
 **Claim**   
-$$\theta^\top X^\top y = y^\top X \theta$$
+
+> $$
+> \theta^\top X^\top y = y^\top X \theta
+> $$
 
 
 **Proof**
 1. Dimensional Analysis | first, we analyze the dimensions of the term $y^\top X \theta$: $\underbrace{y^\top}_{(1 \times n)} \times \underbrace{X}_{(n \times p)} \times \underbrace{\theta}_{(p \times 1)} \rightarrow (1 \times p) \times (p \times 1) \rightarrow (1 \times 1)$ Since the result is a $1 \times 1$ matrix, let $s = y^\top X \theta$, where $s$ is a scalar. 
 
 2. Property of Scalars | For any scalar $s \in \mathbb{R}$, the transpose of the scalar is equal to itself: $$s^\top = s$$
-3. Application of Transpose Properties | By applying the transpose operation to $s$ (using the property $(ABC)^\top = C^\top B^\top A^\top$), we get: $$\begin{aligned} s^\top &= (y^\top X \theta)^\top \\ &= \theta^\top X^\top (y^\top)^\top \\ &= \theta^\top X^\top y \end{aligned}$$
+3. Application of Transpose Properties | By applying the transpose operation to $s$ (using the property $(ABC)^\top = C^\top B^\top A^\top$), we get: 
+
+> $$
+> \begin{aligned} s^\top &= (y^\top X \theta)^\top \\ &= \theta^\top X^\top (y^\top)^\top \\ &= \theta^\top X^\top y \end> {aligned}
+> $$
+
 4. Conclusion | Since $s = s^\top$, it follows that: $$y^\top X \theta = \theta^\top X^\top y$$
 ---
 ### Derivative of Quadratic Form
