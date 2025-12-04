@@ -138,7 +138,9 @@ Let's examine the training process with an example. To apply Gradient Descent, w
 $$
 \hat{\mathbf{y}} =
 \begin{bmatrix}
-\hat{y}_1\\ \vdots\\ \hat{y}_n
+\hat{y}_1\\ 
+\vdots\\ 
+\hat{y}_n
 \end{bmatrix}= X\theta
 $$  
 
@@ -394,7 +396,7 @@ $$
 $$
 
 
-### 2.1.2. Iteration 0 → 1 Detailed Calculation
+### 2.3.2. Iteration 0 → 1 Detailed Calculation
 1.Initial value
 
 $$  
@@ -404,25 +406,46 @@ $$
 2.Prediction
    
 $$
-X\theta_0 = \begin{bmatrix}0 \\ 0 \\ 0 \\ 0\end{bmatrix}
+X\theta_0 = 
+\begin{bmatrix}0 \\ 
+0 \\ 
+0 \\ 
+0
+\end{bmatrix}
 $$
 
 3.Residual
    
 $$
-r_0 = X\theta_0 - y = \begin{bmatrix}-1 \\ -2 \\ -5 \\ -10\end{bmatrix}
+r_0 = X\theta_0 - y = 
+\begin{bmatrix}
+-1 \\
+-2 \\ 
+-5 \\ 
+-10
+\end{bmatrix}
 $$
 
 4.Gradient
    
 $$
-\nabla L(\theta_0)= \frac{2}{4} X^\top r_0= \begin{bmatrix}-56 \\ -21 \\ -9 \end{bmatrix}
+\nabla L(\theta_0)= \frac{2}{4} X^\top r_0= 
+\begin{bmatrix}
+-56 \\ 
+-21 \\ 
+-9 
+\end{bmatrix}
 $$
 
 5.Update
    
 $$
-\theta_1= \theta_0 - 0.01 \nabla L(\theta_0)=\begin{bmatrix}0.56 \\ 0.21 \\ 0.09\end{bmatrix}.
+\theta_1= \theta_0 - 0.01 \nabla L(\theta_0)=
+\begin{bmatrix}
+0.56 \\ 
+0.21 \\ 
+0.09
+\end{bmatrix}.
 $$
 
 The following table shows the parameters and loss values from $k=0$ to $k=10$:
@@ -443,7 +466,7 @@ The following table shows the parameters and loss values from $k=0$ to $k=10$:
 
 After 10 updates, the loss decreases from $32.5$ to about $0.21$, and the model parameters $\theta$ gradually converge to values that fit the data well.
 
-### 2.1.3. ML with optimization code
+### 2.3.3. ML with optimization code
 
 ```python
 import numpy as np
@@ -616,7 +639,11 @@ Strictly defined, Likelihood and PDF are different. While Likelihood can be call
 **PDF**: $p(x \mid \theta)$ is a function of $x$ where $\theta$ is fixed (e.g., $\theta = 0.5$), observing how probability/density changes as $x$ varies. Example (Bernoulli):
 
 $$
-p(x \mid \theta) = \begin{cases} \theta & x = 1 \\ 1-\theta & x = 0 \end{cases}
+p(x \mid \theta) = 
+\begin{cases} 
+\theta & x = 1 \\ 
+1-\theta & x = 0 
+\end{cases}
 $$
 
 Here, if we fix $\theta = 0.7$, then $p(1 \mid 0.7) = 0.7$, $p(0 \mid 0.7) = 0.3$. In other words, it looks at "how the probability changes depending on whether the data $x$ is $0$ or $1$."
@@ -666,9 +693,10 @@ and the log-likelihood is as follows:
 
 $$
 \begin{align}
-L(\theta \mid x) &= \sum_{i=1}^{n} \log \left( \frac{1}{\sigma \sqrt{2\pi}} \exp \left(-\frac{(x_i - \mu)^2}{2\sigma^2} \right) \right) \\
+L(\theta \mid x) &= \sum_{i=1}^{n} \log \left( \frac{1}{\sigma \sqrt{2\pi}} \exp \left( -\frac{(x_i - \mu)^2}{2\sigma^2} \right) \right) \\
 &= \sum_{i=1}^{n} \left\{ \log \left( \exp \left( -\frac{(x_i - \mu)^2}{2\sigma^2} \right) \right) - \log(\sigma \sqrt{2\pi}) \right\} \\
-&= \sum_{i=1}^{n} \left\{ -\frac{(x_i - \mu)^2}{2\sigma^2} - \log(\sigma) - \log(\sqrt{2\pi}) \right\} \end{align}
+&= \sum_{i=1}^{n} \left\{ -\frac{(x_i - \mu)^2}{2\sigma^2} - \log(\sigma) - \log(\sqrt{2\pi}) \right\}
+\end{align}
 $$
 
 Therefore, if we partially differentiate $L(\theta|x)$ with respect to $\mu$,
