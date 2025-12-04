@@ -124,7 +124,7 @@ Thus, Gradient Descent always updates the parameters in a direction that decreas
 <br>
 
 # 2. Machine Learning from optimization persepctive
-Let us redefine model training in ML from the viewpoint of optimization. The goal of machine learning is to make the model represent the underlying data distribution well. **Therefore, the objective is to reduce the loss between the real data and the model’s output.** Consider a dataset $D=\{(x_i, y_i)\}_{i=1}^{n}$ and a model $f_{\theta}(x) = \theta_1 x^2+\theta_2 x + \theta_3$. Using the Mean Squared Error (MSE) loss, the optimization problem is defined as follows:
+Let us redefine model training in ML from the viewpoint of optimization. The goal of machine learning is to make the model represent the underlying data distribution well. Therefore, the objective is to reduce the loss between the real data and the model’s output. Consider a dataset $D=\{(x_i, y_i)\}_{i=1}^{n}$ and a model $f_{\theta}(x) = \theta_1 x^2+\theta_2 x + \theta_3$. Using the Mean Squared Error (MSE) loss, the optimization problem is defined as follows:
 
 $$
 \min_{\theta_1,\theta_2,\theta_3\in\mathbb{R}} \frac{1}{n}\sum^{n}_{i=1}(\theta_1 x^2 + \theta_2 x + \theta_3-y_i)^2
@@ -230,7 +230,8 @@ $$
 s^\top = s
 $$
 
-_Application of Transpose Properties_ | By applying the transpose operation to $s$ (using the property $(ABC)^\top = C^\top B^\top A^\top$), we get: 
+_Application of Transpose Properties_ | By applying the transpose operation to $s$ (using the property $(ABC)^\top = C^\top B^\top A^\top$), we get:
+
 $$
 \begin{aligned} s^\top &= (y^\top X \theta)^\top \\ &= \theta^\top X^\top (y^\top)^\top \\ &= \theta^\top X^\top y \end{aligned}
 $$
@@ -275,6 +276,7 @@ $$
 $$
 
 _Total Differential_ | The total differential $df$ consists of the linear terms in $d\theta$. The term $(d\theta)^\top A d\theta$ is second-order (quadratic in $d\theta$), so it approaches 0 faster than $d\theta$. Thus, we ignore it for the first derivative:
+
 $$
 df \approx (d\theta)^\top A \theta + \theta^\top A d\theta
 $$
@@ -391,35 +393,36 @@ $$
 
 
 ### 2.1.2. Iteration 0 → 1 Detailed Calculation
-1. Initial value
+1.Initial value
 
-    $$  
-    \theta_0 = (0,0,0)^\top  
-    $$
+$$  
+\theta_0 = (0,0,0)^\top  
+$$
 
-2. Prediction
+2.Prediction
    
-   $$
-   X\theta_0 = \begin{bmatrix}0 \\ 0 \\ 0 \\ 0\end{bmatrix}
-   $$
+$$
+X\theta_0 = \begin{bmatrix}0 \\ 0 \\ 0 \\ 0\end{bmatrix}
+$$
 
-3. Residual
+3.Residual
    
-   $$
-   r_0 = X\theta_0 - y = \begin{bmatrix}-1 \\ -2 \\ -5 \\ -10\end{bmatrix}
-   $$
+$$
+r_0 = X\theta_0 - y = \begin{bmatrix}-1 \\ -2 \\ -5 \\ -10\end{bmatrix}
+$$
 
-4. Gradient
+4.Gradient
    
-   $$
-   \nabla L(\theta_0)= \frac{2}{4} X^\top r_0= \begin{bmatrix}-56 \\ -21 \\ -9 \end{bmatrix}
-   $$
+$$
+\nabla L(\theta_0)= \frac{2}{4} X^\top r_0= \begin{bmatrix}-56 \\ -21 \\ -9 \end{bmatrix}
+$$
 
-5. Update
+5.Update
    
-   $$
-   \theta_1= \theta_0 - 0.01 \nabla L(\theta_0)=\begin{bmatrix}0.56 \\ 0.21 \\ 0.09\end{bmatrix}.
-   $$
+$$
+\theta_1= \theta_0 - 0.01 \nabla L(\theta_0)=\begin{bmatrix}0.56 \\ 0.21 \\ 0.09\end{bmatrix}.
+$$
+
 The following table shows the parameters and loss values from $k=0$ to $k=10$:
 
 | k  | θ₁        | θ₂        | θ₃        | L(θₖ)      |
@@ -440,7 +443,7 @@ After 10 updates, the loss decreases from $32.5$ to about $0.21$, and the model 
 
 ### 2.1.3. ML with optimization code
 
-```python**
+```python
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
@@ -648,9 +651,13 @@ Let's verify this using MLE.
 Assuming each sample is extracted from a normal distribution, the sampling distribution of each sample is:
 
 $$
-f_{\mu, \sigma^2}(x_i) = \frac{1}{\sigma \sqrt{2\pi}}\exp\left(-\frac{(x_i - \mu)^2}{2\sigma^2}\right)$$
+f_{\mu, \sigma^2}(x_i) = \frac{1}{\sigma \sqrt{2\pi}}\exp\left(-\frac{(x_i - \mu)^2}{2\sigma^2}\right)
+$$
+
 and let's assume that $x_1, x_2, ..., x_n$ were all extracted independently. Then the likelihood is:
-$$P(x \mid \theta) = \prod_{i=1}^{n} f_{\mu, \sigma^2}(x_i) = \prod_{i=1}^{n} \frac{1}{\sigma \sqrt{2\pi}} \exp\left( -\frac{(x_i - \mu)^2}{2\sigma^2} \right)
+
+$$
+P(x \mid \theta) = \prod_{i=1}^{n} f_{\mu, \sigma^2}(x_i) = \prod_{i=1}^{n} \frac{1}{\sigma \sqrt{2\pi}} \exp\left( -\frac{(x_i - \mu)^2}{2\sigma^2} \right)
 $$
 
 and the log-likelihood is as follows:
@@ -668,9 +675,13 @@ $$
 Therefore, the estimator of the population mean that yields the maximum likelihood is as follows:
 
 $$
-\hat{\mu} = \frac{1}{n} \sum_{i=1}^{n} x_i$$
+\hat{\mu} = \frac{1}{n} \sum_{i=1}^{n} x_i
+$$
+
 On the other hand, if we partially differentiate $L(\theta|x)$ with respect to the standard deviation $\sigma$,
-$$\begin{align*} \frac{\partial L(\theta \mid x)}{\partial \sigma} &= -\frac{n}{\sigma} - \frac{1}{2} \sum_{i=1}^{n} (x_i - \mu)^2 \frac{\partial}{\partial \sigma} \left( \frac{1}{\sigma^{2}} \right) \\[6pt] &= -\frac{n}{\sigma} + \frac{1}{\sigma^{3}} \sum_{i=1}^{n} (x_i - \mu)^2 = 0 \end{align*}
+
+$$
+\begin{align*} \frac{\partial L(\theta \mid x)}{\partial \sigma} &= -\frac{n}{\sigma} - \frac{1}{2} \sum_{i=1}^{n} (x_i - \mu)^2 \frac{\partial}{\partial \sigma} \left( \frac{1}{\sigma^{2}} \right) \\[6pt] &= -\frac{n}{\sigma} + \frac{1}{\sigma^{3}} \sum_{i=1}^{n} (x_i - \mu)^2 = 0 \end{align*}
 $$
 
 The estimator of the population variance that yields the maximum likelihood is as follows:
