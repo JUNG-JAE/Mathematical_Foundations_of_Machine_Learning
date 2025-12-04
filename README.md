@@ -34,7 +34,7 @@ $$
 - $\eta$: learning rate, step size
 - $\nabla f(x_k)$: gradient of the objective function $f$ at $x_k$
 
-GD is an optimization algorithm that minimizes a given objective function $f: \mathbb{R}^n \to \mathbb{R}$ by iteratively updating the variable in the direction that decreases the function value, guided by the gradient. The gradient $\nabla f(x_k)$ represents the direction of steepest ascent. Therefore, to find a minimum, we proceed in the opposite direction. <font color="red">An important point about GD is that updates are not computed directly from the value of</font> $\textcolor{red}{f(x)}$<font color="red">, but rather from the direction determined by the gradient</font> $\textcolor{red}{\nabla f(x_k)}$ <font color="red">and the step size</font> $\textcolor{red}{\eta}$<font color="red">, which specifies how far to move.</font>
+GD is an optimization algorithm that minimizes a given objective function $f: \mathbb{R}^n \to \mathbb{R}$ by iteratively updating the variable in the direction that decreases the function value, guided by the gradient. The gradient $\nabla f(x_k)$ represents the direction of steepest ascent. Therefore, to find a minimum, we proceed in the opposite direction. **An important point about GD is that updates are not computed directly from the value of $f(x)$, but rather from the direction determined by the gradient $\nabla f(x_k)$ and the step size $\eta$, which specifies how far to move.**
 
 ### 1.2.2. Example of GD
 Consider the objective function  $f(x) = x^2,$ whose derivative (gradient in 1D) is $\nabla f(x) = f'(x) = 2x$. In this example, we assume that the closed form of $x^2$ is not available. We apply Gradient Descent with learning rate $\eta = 0.1$, using the update rule:
@@ -46,22 +46,15 @@ $$
 Let the initial point be $x_0 = 2$.  
 The following table shows the first 5 iterations of gradient descent.
 
-$$
-\begin{array}{c|c|c|c|c}
-\hline
-k & x_k & \text{Gradient } 2x_k &
-\text{Update } x_{k+1}=x_k-0.1(2x_k) &
-f(x_k)=x_k^2 \\
-\hline
-0 & 2.0     & 4.0      & 2.0 - 0.4 = 1.6           & 4.0 \\
-1 & 1.6     & 3.2      & 1.6 - 0.32 = 1.28         & 2.56 \\
-2 & 1.28    & 2.56     & 1.28 - 0.256 = 1.024      & 1.6384 \\
-3 & 1.024   & 2.048    & 1.024 - 0.2048 = 0.8192   & 1.048576 \\
-4 & 0.8192  & 1.6384   & 0.8192 - 0.16384 = 0.65536 & 0.67108864 \\
-5 & 0.65536 & 1.31072  & 0.65536 - 0.131072 = 0.524288 & 0.4294967296 \\
-\hline
-\end{array}
-$$
+| k | x_k     | Gradient \(2x_k\) | Update \(x_{k+1} = x_k - 0.1(2x_k)\)   | \(f(x_k) = x_k^2\) |
+|---|---------|-------------------|-----------------------------------------|---------------------|
+| 0 | 2.0     | 4.0               | 2.0 − 0.4 = 1.6                         | 4.0                 |
+| 1 | 1.6     | 3.2               | 1.6 − 0.32 = 1.28                       | 2.56                |
+| 2 | 1.28    | 2.56              | 1.28 − 0.256 = 1.024                    | 1.6384              |
+| 3 | 1.024   | 2.048             | 1.024 − 0.2048 = 0.8192                 | 1.048576            |
+| 4 | 0.8192  | 1.6384            | 0.8192 − 0.16384 = 0.65536              | 0.67108864          |
+| 5 | 0.65536 | 1.31072           | 0.65536 − 0.131072 = 0.524288           | 0.4294967296        |
+
 
 <details>
 <summary><b>Additional remarks on GD</b></summary>
@@ -83,9 +76,11 @@ f(x) &= f(a) + f'(a)(x-a) + \frac{f''(a)}{2!}(x-a)^2 + \frac{f^{(3)}(a)}{3!}(x-a
 &= \sum_{n=0}^{\infty} \frac{f^{(n)}(a)}{n!} (x-a)^n  
 \end{align}  
 $$
+
 Gradient Descent is derived by noting that the first-order Taylor approximation of the objective function $f:\mathbb{R}^n\to\mathbb{R}$ near a point shows that the direction of steepest descent is $-\nabla f$.
 
 Near the current point $x_k$, the first- and second-order Taylor approximations of $f$ are:
+
 $$  
 \begin{aligned}  
 f(x_k + \Delta)  
@@ -95,6 +90,7 @@ f(x_k + \Delta)
 + \frac{1}{2}\Delta^\top H_k \Delta,  
 \end{aligned}  
 $$
+
 where $H_k$ is the Hessian matrix of $f$ at $x_k$.
 
 For small updates $\Delta$, the first-order term dominates, so
