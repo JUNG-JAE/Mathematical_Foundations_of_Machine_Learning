@@ -56,32 +56,28 @@ The following table shows the first 5 iterations of gradient descent.
 | 5 | 0.65536 | 1.31072           | 0.65536 − 0.131072 = 0.524288           | 0.4294967296        |
 
 
-<details>
-<summary><b>Additional remarks on GD</b></summary>
+**Additional remarks on GD**
 
 GD is an algorithm that minimizes a scalar objective function $f: \mathbb{R}^n \to \mathbb{R}$. A single notion of “smaller” is defined only when the output is a scalar, and the descent direction of the gradient is also meaningful in that case. In contrast, if the function outputs a vector, such as $f: \mathbb{R}^n \to \mathbb{R}^m$, each component represents a different objective, resulting in a multi-objective optimization problem.
 
-</details>
-
-<details>
-<summary><b>Gradient Descent from Taylor Expansion</b></summary>
+## 1.3. Gradient Descent from Taylor Expansion (optional)
 
 Gradient Descent is derived from the first-order Taylor approximation, where $-\nabla f$ represents the direction of maximum decrease. To understand this, we revisit the Taylor expansion.
 
 > **Definition of Taylor expansion**: The Taylor series or Taylor expansion of a function is an infinite sum of terms expressed in terms of the function’s derivatives at a single point [2]. In other words, it provides a polynomial approximation of the function near that point.
 
-$  
+$$
 \begin{align}  
 f(x) &= f(a) + f'(a)(x-a) + \frac{f''(a)}{2!}(x-a)^2 + \frac{f^{(3)}(a)}{3!}(x-a)^3 + \cdots \  
 &= \sum_{n=0}^{\infty} \frac{f^{(n)}(a)}{n!} (x-a)^n  
 \end{align}  
-$
+$$
 
 Gradient Descent is derived by noting that the first-order Taylor approximation of the objective function $f:\mathbb{R}^n\to\mathbb{R}$ near a point shows that the direction of steepest descent is $-\nabla f$.
 
 Near the current point $x_k$, the first- and second-order Taylor approximations of $f$ are:
 
-$
+$$
 \begin{aligned}  
 f(x_k + \Delta)  
 &\approx f(x_k) + \nabla f(x_k)^\top \Delta, \  
@@ -89,45 +85,44 @@ f(x_k + \Delta)
 &\approx f(x_k) + \nabla f(x_k)^\top \Delta  
 + \frac{1}{2}\Delta^\top H_k \Delta,  
 \end{aligned}  
-$
+$$
 
 where $H_k$ is the Hessian matrix of $f$ at $x_k$.
 
 For small updates $\Delta$, the first-order term dominates, so
 
-$
+$$
 f(x_k + \Delta) - f(x_k)  
 \approx \Delta f  
 = \nabla f(x_k)^\top \Delta.  
-$
+$$
 
 To decrease $f$, we need $\Delta f < 0$, which means we must choose $\Delta$ such that  
 $\nabla f(x_k)^\top \Delta$ is negative.  Therefore, $\Delta$ must point in the opposite direction of the gradient:
 
-$
+$$
 \Delta \propto -\nabla f(x_k).  
-$
+$$
 
 Introducing a learning rate $\eta > 0$, we set $\Delta = -\eta \nabla f(x_k),$ and the Gradient Descent update becomes:
 
-$
+$$
 x_{k+1} = x_k + \Delta  
 = x_k - \eta \nabla f(x_k).  
-$
+$$
 
 Based on the first-order approximation, the decrease in the function value is
 
-$
+$$
 \Delta f  
 \approx \nabla f(x_k)^\top (-\eta \nabla f(x_k))  
 = -\eta |\nabla f(x_k)|^2 < 0.  
-$
+$$
 
 Thus, Gradient Descent always updates the parameters in a direction that decreases $f$.
 
-> **PS.** If we use the second-order approximation (Newton’s Method), the curvature information (second derivative) allows the algorithm to detect directions that go downhill even when the first derivative is zero. This helps avoid getting stuck at saddle points. However, due to computational cost, most machine learning methods rely only on the first-order approximation.
+**PS.** If we use the second-order approximation (Newton’s Method), the curvature information (second derivative) allows the algorithm to detect directions that go downhill even when the first derivative is zero. This helps avoid getting stuck at saddle points. However, due to computational cost, most machine learning methods rely only on the first-order approximation.
 
-</details>
 <br>
 
 # 2. Machine Learning from optimization persepctive
