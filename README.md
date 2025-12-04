@@ -253,6 +253,8 @@ Let vectors and matrices be defined as follows:
 - $A \in \mathbb{R}^{n \times n}$ is a square matrix (not necessarily symmetric yet).
 - $f(\theta) = \theta^\top A \theta$ is a scalar function (Quadratic Form).
 
+<br>
+
 **Claim**
 
 The gradient of $f(\theta)$ with respect to $\theta$ is:
@@ -262,6 +264,8 @@ $$
 $$
 
 (Corollary: If $A$ is symmetric, i.e., $A = A^\top$, then $\nabla_{\theta} f = 2A\theta$.)
+
+<br>
 
 **Proof**
 
