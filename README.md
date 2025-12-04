@@ -198,6 +198,15 @@ $$
 $$
 
 
+<details>
+<summary><b>Additional remarks on GD</b></summary>
+
+GD minimizes a scalar objective function \( f: \mathbb{R}^n \to \mathbb{R} \).  
+In contrast, for a vector-valued function \( \begin{aligned} s^\top &= (y^\top X \theta)^\top \\ &= \theta^\top X^\top (y^\top)^\top \\ &= \theta^\top X^\top y \end{aligned} \),  
+each component represents a different objective.
+
+</details>
+
 ---
 **Differentiation rules**
 
