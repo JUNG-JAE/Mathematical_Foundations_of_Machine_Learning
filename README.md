@@ -364,8 +364,14 @@ X =
 3^2 & 3 & 1 
 \end{bmatrix} 
 = \begin{bmatrix}
-0 & 0 & 1 \\ 1 & 1 & 1 \\ 4 & 2 & 1 \\ 9 & 3 & 1 \end{bmatrix}, \qquad
-y= \begin{bmatrix} 1\\2\\5\\10 \end{bmatrix}. 
+0 & 0 & 1 \\
+1 & 1 & 1 \\
+4 & 2 & 1 \\
+9 & 3 & 1
+\end{bmatrix},\qquad
+y= \begin{bmatrix}
+1\\2\\5\\10
+\end{bmatrix}. 
 $$
 
 Since the loss function is MSE: $L(\theta) = \frac{1}{n}|X\theta - y|_2^2.$ The gradient is:
