@@ -674,7 +674,11 @@ $$
 Therefore, if we partially differentiate $L(\theta|x)$ with respect to $\mu$,
 
 $$
-\begin{align*} \frac{\partial L(\theta \mid x)}{\partial \mu} &= -\frac{1}{2\sigma^{2}} \sum_{i=1}^{n} \frac{\partial}{\partial \mu} \left( x_i^{\,2} - 2x_i \mu + \mu^{2} \right) \\[6pt] &= -\frac{1}{2\sigma^{2}} \sum_{i=1}^{n} \left( -2x_i + 2\mu \right) \\[6pt] &= \frac{1}{\sigma^{2}} \sum_{i=1}^{n} (x_i - \mu) \\[6pt] &= \frac{1}{\sigma^{2}} \left( \sum_{i=1}^{n} x_i - n\mu \right) = 0 \end{align*}
+\begin{align}
+\frac{\partial L(\theta \mid x)}{\partial \mu} &= -\frac{1}{2\sigma^{2}} \sum_{i=1}^{n} \frac{\partial}{\partial \mu} \left( x_i^{\,2} - 2x_i \mu + \mu^{2} \right) \\[6pt]
+&= -\frac{1}{2\sigma^{2}} \sum_{i=1}^{n} \left( -2x_i + 2\mu \right) \\[6pt] &= \frac{1}{\sigma^{2}} \sum_{i=1}^{n} (x_i - \mu) \\[6pt]
+&= \frac{1}{\sigma^{2}} \left( \sum_{i=1}^{n} x_i - n\mu \right) = 0 
+\end{align}
 $$
 
 Therefore, the estimator of the population mean that yields the maximum likelihood is as follows:
