@@ -46,14 +46,15 @@ $$
 Let the initial point be $x_0 = 2$.  
 The following table shows the first 5 iterations of gradient descent.
 
-| k | \(x_k\) | Gradient \(2x_k\) | Update \(x_{k+1} = x_k - 0.1(2x_k)\) | \(f(x_k) = x_k^2\) |
-|---|--------|-------------------|---------------------------------------|---------------------|
-| 0 | $2.0$     | $4.0$             | $2.0 - 0.4 = 1.6$                     | $4.0$               |
-| 1 | $1.6$     | $3.2$             | $1.6 - 0.32 = 1.28$                   | $2.56$              |
-| 2 | $1.28$    | $2.56$            | $1.28 - 0.256 = 1.024$                | $1.6384$            |
-| 3 | $1.024$   | $2.048$           | $1.024 - 0.2048 = 0.8192$             | $1.048576$          |
-| 4 | $0.8192$  | $1.6384$          | $0.8192 - 0.16384 = 0.65536$          | $0.67108864$        |
-| 5 | $0.65536$ | $1.31072$         | $0.65536 - 0.131072 = 0.524288$       | $0.4294967296$      |
+| k | x_k     | Gradient  | Update    | f(x_k) |
+|---|---------|-------------------|-----------------------------------------|---------------------|
+| 0 | 2.0     | 4.0               | 2.0 − 0.4 = 1.6                         | 4.0                 |
+| 1 | 1.6     | 3.2               | 1.6 − 0.32 = 1.28                       | 2.56                |
+| 2 | 1.28    | 2.56              | 1.28 − 0.256 = 1.024                    | 1.6384              |
+| 3 | 1.024   | 2.048             | 1.024 − 0.2048 = 0.8192                 | 1.048576            |
+| 4 | 0.8192  | 1.6384            | 0.8192 − 0.16384 = 0.65536              | 0.67108864          |
+| 5 | 0.65536 | 1.31072           | 0.65536 − 0.131072 = 0.524288           | 0.4294967296        |
+
 
 <details>
 <summary><b>Additional remarks on GD</b></summary>
@@ -67,20 +68,20 @@ GD is an algorithm that minimizes a scalar objective function $f: \mathbb{R}^n \
 
 Gradient Descent is derived from the first-order Taylor approximation, where $-\nabla f$ represents the direction of maximum decrease. To understand this, we revisit the Taylor expansion.
 
-**Definition of Taylor expansion**: The Taylor series or Taylor expansion of a function is an infinite sum of terms expressed in terms of the function’s derivatives at a single point [2]. In other words, it provides a polynomial approximation of the function near that point.
+> **Definition of Taylor expansion**: The Taylor series or Taylor expansion of a function is an infinite sum of terms expressed in terms of the function’s derivatives at a single point [2]. In other words, it provides a polynomial approximation of the function near that point.
 
-$$  
+$  
 \begin{align}  
 f(x) &= f(a) + f'(a)(x-a) + \frac{f''(a)}{2!}(x-a)^2 + \frac{f^{(3)}(a)}{3!}(x-a)^3 + \cdots \  
 &= \sum_{n=0}^{\infty} \frac{f^{(n)}(a)}{n!} (x-a)^n  
 \end{align}  
-$$
+$
 
 Gradient Descent is derived by noting that the first-order Taylor approximation of the objective function $f:\mathbb{R}^n\to\mathbb{R}$ near a point shows that the direction of steepest descent is $-\nabla f$.
 
 Near the current point $x_k$, the first- and second-order Taylor approximations of $f$ are:
 
-$$  
+$
 \begin{aligned}  
 f(x_k + \Delta)  
 &\approx f(x_k) + \nabla f(x_k)^\top \Delta, \  
@@ -88,39 +89,39 @@ f(x_k + \Delta)
 &\approx f(x_k) + \nabla f(x_k)^\top \Delta  
 + \frac{1}{2}\Delta^\top H_k \Delta,  
 \end{aligned}  
-$$
+$
 
 where $H_k$ is the Hessian matrix of $f$ at $x_k$.
 
 For small updates $\Delta$, the first-order term dominates, so
 
-$$  
+$
 f(x_k + \Delta) - f(x_k)  
 \approx \Delta f  
 = \nabla f(x_k)^\top \Delta.  
-$$
+$
 
 To decrease $f$, we need $\Delta f < 0$, which means we must choose $\Delta$ such that  
 $\nabla f(x_k)^\top \Delta$ is negative.  Therefore, $\Delta$ must point in the opposite direction of the gradient:
 
-$$  
+$
 \Delta \propto -\nabla f(x_k).  
-$$
+$
 
 Introducing a learning rate $\eta > 0$, we set $\Delta = -\eta \nabla f(x_k),$ and the Gradient Descent update becomes:
 
-$$  
+$
 x_{k+1} = x_k + \Delta  
 = x_k - \eta \nabla f(x_k).  
-$$
+$
 
 Based on the first-order approximation, the decrease in the function value is
 
-$$  
+$
 \Delta f  
 \approx \nabla f(x_k)^\top (-\eta \nabla f(x_k))  
 = -\eta |\nabla f(x_k)|^2 < 0.  
-$$
+$
 
 Thus, Gradient Descent always updates the parameters in a direction that decreases $f$.
 
@@ -130,22 +131,30 @@ Thus, Gradient Descent always updates the parameters in a direction that decreas
 <br>
 
 # 2. Machine Learning from optimization persepctive
-Let us redefine model training in ML from the viewpoint of optimization. The goal of machine learning is to make the model represent the underlying data distribution well. <span style="color:red">Therefore, the objective is to reduce the loss between the real data and the model’s output.</span>
+Let us redefine model training in ML from the viewpoint of optimization. The goal of machine learning is to make the model represent the underlying data distribution well. Therefore, the objective is to reduce the loss between the real data and the model’s output.
 
 Given a dataset with $n$ samples  $D={(x_i, y_i)}^{n}_{i=1}$ and a model  $f_{\theta}(x):\theta_1 x^2+\theta_2 x + \theta_3$, suppose we use MSE (Mean Squared Error) $L(\theta)=\frac{1}{n}\sum^{n}_{i=1}(\hat{y}_i-y_i)^2$ to measure the loss, where $\hat y$ is the model output. Then the optimization problem in machine learning is defined as follows:  
-$$\min_{\theta_1,\theta_2,\theta_3\in\mathbb{R}} \frac{1}{n}\sum^{n}_{i=1}(\theta_1 x^2 + \theta_2 x + \theta_3-y_i)^2$$
-In other words, the goal is to minimize the average loss over all data points.   Just like the previous GD example where we updated $x$ to find the minimum of $f(x)$, we update $\theta$ in the direction that reduces the gradient of the loss, and continue GD until the loss becomes no longer decreases.
+
+$$
+\min_{\theta_1,\theta_2,\theta_3\in\mathbb{R}} \frac{1}{n}\sum^{n}_{i=1}(\theta_1 x^2 + \theta_2 x + \theta_3-y_i)^2
+$$
+
+In other words, the goal is to minimize the average loss over all data points. Just like the previous GD example where we updated $x$ to find the minimum of $f(x)$, we update $\theta$ in the direction that reduces the gradient of the loss, and continue GD until the loss becomes no longer decreases.
 
 ## 2.1. Machine learning with gradient descent
 Let's examine the training process with an example. To apply Gradient Descent, we first need to differentiate the model. Given the model $\hat{y} = \theta_1 x^2 + \theta_2 x + \theta_3$ and the basis vector $[x^2, \; x, \; 1]^\top$, we can express the system for a dataset $D$ as follows:
+
 $$
 \hat{\mathbf{y}} =
 \begin{bmatrix}
 \hat{y}_1\\ \vdots\\ \hat{y}_n
 \end{bmatrix}= X\theta
 $$  
+
 where $X$ is the design matrix:
-$$X =
+
+$$
+X =
 \begin{bmatrix}
 x_1^2 & x_1 & 1 \\
 \vdots & \vdots & \vdots \\
@@ -168,6 +177,7 @@ y_n
 $$
 
 Thus, the objective function (loss function) is defined as:  
+
 $$
 \begin{align}
 L(\theta) &= \frac{1}{n}\sum^{n}_{i=1}(\hat{y}_i-y_i)^2=\frac{1}{n}\|X\theta-y\|^2_2 \tag{1}\\
@@ -177,14 +187,22 @@ L(\theta) &= \frac{1}{n}\sum^{n}_{i=1}(\hat{y}_i-y_i)^2=\frac{1}{n}\|X\theta-y\|
 &= \frac{1}{n}\theta^\top X^\top X\theta-2y^\top X\theta+y^\top y \tag{5}
 \end{align}
 $$
+
 + 3 $\rightarrow$ 4: expanding the inner product and changing multiplication order  
 + 4 $\rightarrow$ 5: since the result is a scalar, the order can be rearranged. 
 
 Differentiating the objective function:  
-$$\nabla_{\theta} L(\theta) = \frac{1}{n} \left( 2X^\top X\theta - 2X^\top y \right) = \frac{2}{n} X^\top (X\theta - y)$$
+
+$$
+\nabla_{\theta} L(\theta) = \frac{1}{n} \left( 2X^\top X\theta - 2X^\top y \right) = \frac{2}{n} X^\top (X\theta - y)
+$$
+
 Thus, the GD update rule is:  
-$$ \theta_{k+1} = \theta_k - \eta \nabla_{\theta} L(\theta_k)  
-= \theta_k - \eta \cdot \frac{2}{n} X^\top (X\theta_k - y) $$
+
+$$ 
+\theta_{k+1} = \theta_k - \eta \nabla_{\theta} L(\theta_k)  
+= \theta_k - \eta \cdot \frac{2}{n} X^\top (X\theta_k - y) 
+$$
 
 <details>
 <summary><b>Differentiation rules</b></summary>
@@ -203,7 +221,7 @@ $$\theta^\top X^\top y = y^\top X \theta$$
 
 
 **Proof**
-1. Dimensional Analysis | first, we analyze the dimensions of the term $y^\top X \theta$: $$\underbrace{y^\top}_{(1 \times n)} \times \underbrace{X}_{(n \times p)} \times \underbrace{\theta}_{(p \times 1)} \rightarrow (1 \times p) \times (p \times 1) \rightarrow (1 \times 1)$$Since the result is a $1 \times 1$ matrix, let $s = y^\top X \theta$, where $s$ is a scalar. 
+1. Dimensional Analysis | first, we analyze the dimensions of the term $y^\top X \theta$: $\underbrace{y^\top}_{(1 \times n)} \times \underbrace{X}_{(n \times p)} \times \underbrace{\theta}_{(p \times 1)} \rightarrow (1 \times p) \times (p \times 1) \rightarrow (1 \times 1)$ Since the result is a $1 \times 1$ matrix, let $s = y^\top X \theta$, where $s$ is a scalar. 
 
 2. Property of Scalars | For any scalar $s \in \mathbb{R}$, the transpose of the scalar is equal to itself: $$s^\top = s$$
 3. Application of Transpose Properties | By applying the transpose operation to $s$ (using the property $(ABC)^\top = C^\top B^\top A^\top$), we get: $$\begin{aligned} s^\top &= (y^\top X \theta)^\top \\ &= \theta^\top X^\top (y^\top)^\top \\ &= \theta^\top X^\top y \end{aligned}$$
