@@ -694,8 +694,8 @@ and the log-likelihood is as follows:
 $$
 \begin{align}
 L(\theta \mid x) &= \sum_{i=1}^{n} \log \left( \frac{1}{\sigma \sqrt{2\pi}} \exp \left( -\frac{(x_i - \mu)^2}{2\sigma^2} \right) \right) \\
-&= \sum_{i=1}^{n} \left\{ \log \left( \exp \left( -\frac{(x_i - \mu)^2}{2\sigma^2} \right) \right) - \log(\sigma \sqrt{2\pi}) \right\} \\
-&= \sum_{i=1}^{n} \left\{ -\frac{(x_i - \mu)^2}{2\sigma^2} - \log(\sigma) - \log(\sqrt{2\pi}) \right\}
+&= \sum_{i=1}^{n} \log \left( \exp \left( -\frac{(x_i - \mu)^2}{2\sigma^2} \right) \right) - \log(\sigma \sqrt{2\pi}) \\
+&= \sum_{i=1}^{n} -\frac{(x_i - \mu)^2}{2\sigma^2} - \log(\sigma) - \log(\sqrt{2\pi})
 \end{align}
 $$
 
@@ -765,11 +765,13 @@ L(\theta) = \prod_{i=1}^N p_\theta(y_i \mid x_i) = \prod_{i=1}^N \frac{1}{\sqrt{
 $$
 
 Using log-likelihood for computational convenience gives:
+
 $$
 \ell(\theta) = \log L(\theta) = \sum_{i=1}^N \log p_\theta(y_i \mid x_i)
 $$
 
 Expanding the equation above directly:
+
 $$
 \ell(\theta) = \sum_{i=1}^N \left[-\frac{1}{2}\log(2\pi\sigma^2)- \frac{(y_i - f(x_i;\theta))^2}{2\sigma^2}\right],
 $$
