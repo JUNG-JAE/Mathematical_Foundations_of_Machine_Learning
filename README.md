@@ -124,7 +124,7 @@ Thus, Gradient Descent always updates the parameters in a direction that decreas
 <br>
 
 # 2. Machine Learning from optimization persepctive
-Let us redefine model training in ML from the viewpoint of optimization. The goal of machine learning is to make the model represent the underlying data distribution well. Therefore, the objective is to reduce the loss between the real data and the model’s output. Consider a dataset $D={(x_i, y_i)}^{n}_{i=1}$ and a model $f_{\theta}(x):\theta_1 x^2+\theta_2 x + \theta_3$ . Using the Mean Squared Error (MSE) loss $L(\theta)=\frac{1}{n}\sum^{n}_{i=1}(\hat{y}_i-y_i)^2$, the optimization problem is defined as follows:
+Let us redefine model training in ML from the viewpoint of optimization. The goal of machine learning is to make the model represent the underlying data distribution well. **Therefore, the objective is to reduce the loss between the real data and the model’s output.** Consider a dataset $D=(x_i, y_i)^n_{i=1}$ and a model $f_\theta(x):\theta_1 x^2+\theta_2 x + \theta_3$ . Using the Mean Squared Error (MSE) loss $L(\theta)=\frac{1}{n}\sum^{n}_{i=1}(\hat{y}_i-y_i)^2$, the optimization problem is defined as follows:
 
 $$
 \min_{\theta_1,\theta_2,\theta_3\in\mathbb{R}} \frac{1}{n}\sum^{n}_{i=1}(\theta_1 x^2 + \theta_2 x + \theta_3-y_i)^2
@@ -704,7 +704,8 @@ Therefore, if we partially differentiate $L(\theta|x)$ with respect to $\mu$,
 $$
 \begin{align}
 \frac{\partial L(\theta \mid x)}{\partial \mu} &= -\frac{1}{2\sigma^{2}} \sum_{i=1}^{n} \frac{\partial}{\partial \mu} \left( x_i^{\,2} - 2x_i \mu + \mu^{2} \right) \\
-&= -\frac{1}{2\sigma^{2}} \sum_{i=1}^{n} \left( -2x_i + 2\mu \right) \\ &= \frac{1}{\sigma^{2}} \sum_{i=1}^{n} (x_i - \mu) \\
+&= -\frac{1}{2\sigma^{2}} \sum_{i=1}^{n} \left( -2x_i + 2\mu \right) \\ 
+&= \frac{1}{\sigma^{2}} \sum_{i=1}^{n} (x_i - \mu) \\
 &= \frac{1}{\sigma^{2}} \left( \sum_{i=1}^{n} x_i - n\mu \right) = 0 
 \end{align}
 $$
